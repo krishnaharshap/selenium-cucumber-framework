@@ -1,0 +1,58 @@
+package com.automation.utils;
+
+import com.automation.constants.FrameworkConstants;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.util.Properties;
+
+public class ConfigReader {
+
+    private static final Logger logger = LogManager.getLogger(ConfigReader.class);
+    private static Properties properties;
+
+    static {
+        try {
+            FileInputStream fis = new FileInputStream(FrameworkConstants.CONFIG_FILE_PATH);
+            properties = new Properties();
+            properties.load(fis);
+            logger.info("Configuration properties loaded successfully");
+        } catch (IOException e) {
+            logger.error("Failed to load configuration file: " + e.getMessage());
+            throw new RuntimeException("Configuration file not found at: " + FrameworkConstants.CONFIG_FILE_PATH);
+        }
+    }
+
+    public static String getProperty(String key) {
+        String value = properties.getProperty(key);
+        if (value != null) {
+            return value.trim();
+        }
+        logger.warn("Property key '{}' not found in config file", key);
+        return null;
+    }
+
+    public static String getBrowser() {
+        return getProperty("browser");
+    }
+
+    public static String getUrl() {
+        return getProperty("url");
+    }
+
+    public static boolean isHeadless() {
+        return Boolean.parseBoolean(getProperty("headless"));
+    }
+
+    public static int getImplicitWait() {
+        String wait = getProperty("implicit.wait");
+        return wait != null ? Integer.parseInt(wait) : FrameworkConstants.IMPLICIT_WAIT_TIMEOUT;
+    }
+
+    public static int getExplicitWait() {
+        String wait = getProperty("explicit.wait");
+        return wait != null ? Integer.parseInt(wait) : FrameworkConstants.EXPLICIT_WAIT_TIMEOUT;
+    }
+}
