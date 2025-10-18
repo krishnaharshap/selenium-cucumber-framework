@@ -190,7 +190,7 @@ export PATH=$JAVA_HOME/bin:$MAVEN_HOME/bin:$PATH
 ### 1. Clone Repository
 
 ```bash
-git clone https://github.com/your-username/selenium-cucumber-framework.git
+git clone https://github.com/krishnaharshap/selenium-cucumber-framework.git
 cd selenium-cucumber-framework
 ```
 
@@ -802,8 +802,8 @@ copies or substantial portions of the Software.
 🐙 GitHub: [github.com/krishnaharshap](https://github.com/krishnaharshap)
 
 ### Support Channels
-- 🐛 **Bug Reports:** [GitHub Issues](https://github.com/yourusername/selenium-cucumber-framework/issues)
-- 💡 **Feature Requests:** [GitHub Discussions](https://github.com/yourusername/selenium-cucumber-framework/discussions)
+- 🐛 **Bug Reports:** [GitHub Issues](https://github.com/krishnaharshap/selenium-cucumber-framework/issues)
+- 💡 **Feature Requests:** [GitHub Discussions](https://github.com/krishnaharshap/selenium-cucumber-framework/discussions)
 - 📧 **Email:** krishnaharshap11@gmail.com
 
 ---
