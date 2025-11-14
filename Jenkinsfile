@@ -2,6 +2,7 @@ pipeline {
     agent any
 
     tools {
+        // Names must match entries under "Manage Jenkins → Global Tool Configuration"
         maven 'Maven-3.9.5'
         jdk 'JDK-11'
     }
@@ -16,155 +17,149 @@ pipeline {
         BROWSER = "${params.BROWSER}"
         TAGS = "${params.TAGS}"
         HEADLESS = "${params.HEADLESS}"
+        // Optional: override if you configured MAVEN_HOME/JAVA_HOME manually on agents
+        // MAVEN_HOME = tool name resolution already sets PATH to maven/bin
     }
 
     stages {
         stage('Checkout') {
             steps {
-                script {
-                    echo "=========================================="
-                    echo "Checking out code from repository"
-                    echo "=========================================="
-                }
+                echo "=== Checkout ==="
                 checkout scm
             }
         }
 
         stage('Clean') {
             steps {
+                echo "=== Clean ==="
                 script {
-                    echo "=========================================="
-                    echo "Cleaning previous build artifacts"
-                    echo "=========================================="
+                    if (isUnix()) {
+                        sh 'mvn -B -q clean'
+                    } else {
+                        bat 'mvn -B -q clean'
+                    }
                 }
-                bat 'mvn clean'
             }
         }
 
         stage('Compile') {
             steps {
+                echo "=== Compile ==="
                 script {
-                    echo "=========================================="
-                    echo "Compiling the project"
-                    echo "=========================================="
+                    if (isUnix()) {
+                        sh 'mvn -B -q compile'
+                    } else {
+                        bat 'mvn -B -q compile'
+                    }
                 }
-                bat 'mvn compile'
             }
         }
 
         stage('Run Tests') {
             steps {
+                echo "=== Running Tests ==="
+                echo "Browser: ${BROWSER}, Tags: ${TAGS}, Headless: ${HEADLESS}"
                 script {
-                    echo "=========================================="
-                    echo "Executing Test Suite"
-                    echo "Browser: ${BROWSER}"
-                    echo "Tags: ${TAGS}"
-                    echo "Headless: ${HEADLESS}"
-                    echo "=========================================="
+                    def cmd = "mvn -B test -Dbrowser=${BROWSER} -Dcucumber.filter.tags=\"${TAGS}\" -Dheadless=${HEADLESS}"
+                    if (isUnix()) {
+                        sh cmd
+                    } else {
+                        bat cmd
+                    }
                 }
-                bat """
-                    mvn test -Dbrowser=${BROWSER} -Dcucumber.filter.tags=${TAGS} -Dheadless=${HEADLESS}
-                """
             }
         }
 
         stage('Generate Allure Report') {
             steps {
+                echo "=== Generate Allure ==="
                 script {
-                    echo "=========================================="
-                    echo "Generating Allure Report"
-                    echo "=========================================="
+                    // If you use allure-maven plugin, mvn allure:report will work
+                    if (isUnix()) {
+                        sh 'mvn -B allure:report || true'
+                    } else {
+                        bat 'mvn -B allure:report || exit /b 0'
+                    }
                 }
-                bat 'mvn allure:report'
             }
         }
     }
 
     post {
         always {
+            echo "=== Publish Reports & Archive ==="
+            // Publish Allure if plugin installed and results exist
             script {
-                echo "=========================================="
-                echo "Publishing Test Reports"
-                echo "=========================================="
+                // Publish via Allure Jenkins plugin (set path results to target/allure-results)
+                try {
+                    allure([
+                        includeProperties: false,
+                        jdk: '',
+                        properties: [],
+                        reportBuildPolicy: 'ALWAYS',
+                        results: [[path: 'target/allure-results']]
+                    ])
+                } catch (e) {
+                    echo "Allure publish failed or plugin not installed: ${e}"
+                }
             }
 
-            // Publish Allure Report
-            allure([
-                includeProperties: false,
-                jdk: '',
-                properties: [],
-                reportBuildPolicy: 'ALWAYS',
-                results: [[path: 'target/allure-results']]
-            ])
-
-            // Publish Extent Report
+            // Publish Extent & Cucumber HTML using Publish HTML plugin
             publishHTML([
-                allowMissing: false,
+                allowMissing: true,
                 alwaysLinkToLastBuild: true,
                 keepAll: true,
                 reportDir: 'test-output/extent-reports',
                 reportFiles: 'ExtentReport*.html',
-                reportName: 'Extent Report',
-                reportTitles: 'Test Execution Report'
+                reportName: 'Extent Report'
             ])
 
-            // Publish Cucumber Report
             publishHTML([
-                allowMissing: false,
+                allowMissing: true,
                 alwaysLinkToLastBuild: true,
                 keepAll: true,
                 reportDir: 'test-output/cucumber-reports',
                 reportFiles: 'cucumber.html',
-                reportName: 'Cucumber Report',
-                reportTitles: 'Cucumber HTML Report'
+                reportName: 'Cucumber Report'
             ])
 
-            // Archive artifacts
-            archiveArtifacts artifacts: '**/test-output/**/*.*, **/logs/**/*.log', allowEmptyArchive: true
+            archiveArtifacts artifacts: '**/target/**/*.*, **/test-output/**/*.*, **/logs/**/*.log', allowEmptyArchive: true
         }
 
         success {
+            echo "=== BUILD SUCCESS ==="
+            // Email plugin call; requires configured SMTP and plugin (emailext)
             script {
-                echo "=========================================="
-                echo "✓ BUILD SUCCESSFUL"
-                echo "=========================================="
+                try {
+                    emailext (
+                        subject: "✓ SUCCESS: ${env.JOB_NAME} #${env.BUILD_NUMBER}",
+                        body: """<p>Build successful.</p>
+                                 <p>Browser: ${BROWSER}</p>
+                                 <p>Tags: ${TAGS}</p>
+                                 <p>Build URL: <a href='${env.BUILD_URL}'>${env.BUILD_URL}</a></p>""",
+                        to: 'krishnaharshap11@gmail.com',
+                        mimeType: 'text/html'
+                    )
+                } catch (e) {
+                    echo "Email send failed: ${e}"
+                }
             }
-            emailext(
-                subject: "✓ SUCCESS: Jenkins Build ${env.JOB_NAME} - ${env.BUILD_NUMBER}",
-                body: """
-                    <h2>Build Successful</h2>
-                    <p><b>Job Name:</b> ${env.JOB_NAME}</p>
-                    <p><b>Build Number:</b> ${env.BUILD_NUMBER}</p>
-                    <p><b>Browser:</b> ${BROWSER}</p>
-                    <p><b>Tags:</b> ${TAGS}</p>
-                    <p><b>Build URL:</b> <a href="${env.BUILD_URL}">${env.BUILD_URL}</a></p>
-                    <p><b>Allure Report:</b> <a href="${env.BUILD_URL}allure">View Report</a></p>
-                """,
-                to: 'qa-team@example.com',
-                mimeType: 'text/html'
-            )
         }
 
         failure {
+            echo "=== BUILD FAILED ==="
             script {
-                echo "=========================================="
-                echo "✗ BUILD FAILED"
-                echo "=========================================="
+                try {
+                    emailext (
+                        subject: "✗ FAILURE: ${env.JOB_NAME} #${env.BUILD_NUMBER}",
+                        body: """<p>Build failed. Console: <a href='${env.BUILD_URL}console'>console</a></p>""",
+                        to: 'krishnaharshap11@gmail.com',
+                        mimeType: 'text/html'
+                    )
+                } catch (e) {
+                    echo "Email send failed: ${e}"
+                }
             }
-            emailext(
-                subject: "✗ FAILURE: Jenkins Build ${env.JOB_NAME} - ${env.BUILD_NUMBER}",
-                body: """
-                    <h2>Build Failed</h2>
-                    <p><b>Job Name:</b> ${env.JOB_NAME}</p>
-                    <p><b>Build Number:</b> ${env.BUILD_NUMBER}</p>
-                    <p><b>Browser:</b> ${BROWSER}</p>
-                    <p><b>Tags:</b> ${TAGS}</p>
-                    <p><b>Build URL:</b> <a href="${env.BUILD_URL}">${env.BUILD_URL}</a></p>
-                    <p><b>Console Output:</b> <a href="${env.BUILD_URL}console">View Console</a></p>
-                """,
-                to: 'qa-team@example.com',
-                mimeType: 'text/html'
-            )
         }
     }
 }
