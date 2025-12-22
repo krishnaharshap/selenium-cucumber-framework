@@ -1,4 +1,4 @@
-# 🚀 E2E Test Automation Framework
+# E2E Test Automation Framework
 
 [![Build Status](https://img.shields.io/badge/build-passing-brightgreen)]()
 [![Coverage](https://img.shields.io/badge/coverage-85%25-green)]()
@@ -6,42 +6,41 @@
 [![Java](https://img.shields.io/badge/Java-11-orange)]()
 [![Selenium](https://img.shields.io/badge/Selenium-4.15.0-green)]()
 [![Cucumber](https://img.shields.io/badge/Cucumber-7.14.0-brightgreen)]()
+<!---[![CI](https://github.com/krishnaharshap/selenium-cucumber-framework/actions/workflows/ci.yml/badge.svg)](https://github.com/krishnaharshap/selenium-cucumber-framework/actions)--->
 
-> **Enterprise-grade test automation framework implementing Page Object Model (POM) design pattern with Behavior-Driven Development (BDD) using Cucumber, Selenium WebDriver, and TestNG. Features dual reporting mechanisms (Allure & Extent), Jenkins CI/CD integration, and cross-browser testing capabilities.**
+**Enterprise-grade test automation framework implementing Page Object Model (POM) design pattern with Behavior-Driven Development (BDD) using Cucumber, Selenium WebDriver, and TestNG. Features dual reporting mechanisms (Allure & Extent), Jenkins CI/CD integration, and cross-browser testing capabilities.**
+
+## Table of Contents
+
+- [Project Overview](#project-overview)
+- [Key Features](#key-features)
+- [Technology Stack](#technology-stack)
+- [Project Architecture](#project-architecture)
+- [Prerequisites](#prerequisites)
+- [Installation & Setup](#installation--setup)
+- [Project Structure](#project-structure)
+- [Configuration](#configuration)
+- [Running Tests](#running-tests)
+- [Test Reports](#test-reports)
+- [CI/CD Integration](#cicd-integration)
+- [Test Coverage](#test-coverage)
+- [Best Practices](#best-practices)
+- [Troubleshooting](#troubleshooting)
+- [Contributing](#contributing)
+- [Documentation](#documentation)
+- [License](#license)
+- [Contact](#contact)
 
 ---
 
-## 📋 Table of Contents
-
-- [Project Overview](#-project-overview)
-- [Key Features](#-key-features)
-- [Technology Stack](#-technology-stack)
-- [Project Architecture](#-project-architecture)
-- [Prerequisites](#-prerequisites)
-- [Installation & Setup](#-installation--setup)
-- [Project Structure](#-project-structure)
-- [Configuration](#-configuration)
-- [Running Tests](#-running-tests)
-- [Test Reports](#-test-reports)
-- [CI/CD Integration](#-cicd-integration)
-- [Test Coverage](#-test-coverage)
-- [Best Practices](#-best-practices)
-- [Troubleshooting](#-troubleshooting)
-- [Contributing](#-contributing)
-- [Documentation](#-documentation)
-- [License](#-license)
-- [Contact](#-contact)
-
----
-
-## 📊 Project Overview
+## Project Overview
 
 ### Objective
 Develop a robust, scalable, and maintainable end-to-end test automation solution that reduces manual testing effort by 95%, accelerates release cycles, and improves software quality with 85% functional coverage.
 
 ### Application Under Test
 **SauceDemo** - E-commerce Web Application  
-🔗 [https://www.saucedemo.com](https://www.saucedemo.com)
+[https://www.saucedemo.com](https://www.saucedemo.com)
 
 ### Project Metrics
 - **Execution Time:** 18 minutes (Full Regression Suite)
@@ -53,7 +52,7 @@ Develop a robust, scalable, and maintainable end-to-end test automation solution
 
 ---
 
-## ✨ Key Features
+## Key Features
 
 ### Core Capabilities
 - ✅ **Page Object Model (POM)** - Industry-standard design pattern for maintainability
@@ -71,7 +70,7 @@ Develop a robust, scalable, and maintainable end-to-end test automation solution
 
 ---
 
-## 🛠 Technology Stack
+## Technology Stack
 
 ### Core Technologies
 
@@ -97,7 +96,7 @@ Develop a robust, scalable, and maintainable end-to-end test automation solution
 
 ---
 
-## 🏗 Project Architecture
+## Project Architecture
 
 ### Design Patterns Implemented
 
@@ -155,7 +154,7 @@ pages/
 
 ---
 
-## 📋 Prerequisites
+## Prerequisites
 
 ### Required Software
 
@@ -185,7 +184,7 @@ export PATH=$JAVA_HOME/bin:$MAVEN_HOME/bin:$PATH
 
 ---
 
-## 🚀 Installation & Setup
+## Installation & Setup
 
 ### 1. Clone Repository
 
@@ -237,7 +236,7 @@ mvn clean test "-Dcucumber.filter.tags=@Smoke"
 
 ---
 
-## 📁 Project Structure
+## Project Structure
 
 ```
 selenium-cucumber-framework/
@@ -315,7 +314,7 @@ selenium-cucumber-framework/
 
 ---
 
-## ⚙️ Configuration
+## Configuration
 
 ### Application Configuration
 **File:** `src/main/resources/config/config.properties`
@@ -366,7 +365,7 @@ Key dependencies managed:
 
 ---
 
-## 🎮 Running Tests
+## Running Tests
 
 ### Command Line Execution
 
@@ -439,7 +438,7 @@ mvn clean test -Dcucumber.filter.tags="@Smoke" -Dbrowser=chrome -Dheadless=true
 
 ---
 
-## 📊 Test Reports
+## Test Reports
 
 ### Allure Reports
 
@@ -499,7 +498,7 @@ mvn allure:report
 
 ---
 
-## 🔄 CI/CD Integration
+## CI/CD Integration
 
 ### Jenkins Pipeline
 
@@ -562,7 +561,7 @@ triggers {
 
 ---
 
-## 🎯 Test Coverage
+## Test Coverage
 
 ### Modules Automated
 
@@ -598,7 +597,7 @@ triggers {
 
 ---
 
-## 📚 Best Practices
+## Best Practices
 
 ### Code Quality
 - ✅ Follow SOLID principles
@@ -638,7 +637,7 @@ Feature: User Login Functionality
 
 ---
 
-## 🐛 Troubleshooting
+## Troubleshooting
 
 ### Common Issues & Solutions
 
@@ -702,7 +701,7 @@ mvn clean test -X -Dcucumber.filter.tags="@Smoke"
 
 ---
 
-## 🤝 Contributing
+## Contributing
 
 ### Contribution Guidelines
 
@@ -750,7 +749,7 @@ chore: Maintenance tasks
 
 ---
 
-## 📖 Documentation
+## Documentation
 
 ### Available Documentation
 
@@ -771,7 +770,7 @@ chore: Maintenance tasks
 
 ---
 
-## 📄 License
+## License
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
@@ -793,22 +792,22 @@ copies or substantial portions of the Software.
 
 ---
 
-## 📞 Contact
+## Contact
 
 ### Project Maintainer
 **Krishna Harsha**  
-📧 Email: krishnaharshap11@gmail.com  
-💼 LinkedIn: [linkedin.com/in/krishnap](https://linkedin.com/in/krishnap)  
-🐙 GitHub: [github.com/krishnaharshap](https://github.com/krishnaharshap)
+Email: krishnaharshap11@gmail.com  
+LinkedIn: [linkedin.com/in/krishnap](https://linkedin.com/in/krishnap)  
+GitHub: [github.com/krishnaharshap](https://github.com/krishnaharshap)
 
 ### Support Channels
-- 🐛 **Bug Reports:** [GitHub Issues](https://github.com/krishnaharshap/selenium-cucumber-framework/issues)
-- 💡 **Feature Requests:** [GitHub Discussions](https://github.com/krishnaharshap/selenium-cucumber-framework/discussions)
-- 📧 **Email:** krishnaharshap11@gmail.com
+- **Bug Reports:** [GitHub Issues](https://github.com/krishnaharshap/selenium-cucumber-framework/issues)
+- **Feature Requests:** [GitHub Discussions](https://github.com/krishnaharshap/selenium-cucumber-framework/discussions)
+- **Email:** krishnaharshap11@gmail.com
 
 ---
 
-## 🙏 Acknowledgments
+## Acknowledgments
 
 - **SauceDemo** for providing the test application
 - **Selenium Community** for excellent documentation and support
@@ -818,7 +817,7 @@ copies or substantial portions of the Software.
 
 ---
 
-## 📊 Project Insight & Community
+## Project Insight & Community
 
 ![Stars](https://img.shields.io/github/stars/krishnaharshap/selenium-cucumber-framework?style=social)  
 ![Forks](https://img.shields.io/github/forks/krishnaharshap/selenium-cucumber-framework?style=social)  
@@ -830,7 +829,7 @@ copies or substantial portions of the Software.
 
 ---
 
-## 🗺️ Roadmap
+## Roadmap
 
 ### Phase 2 (Planned)
 - [ ] API Testing Integration (RestAssured)
@@ -846,11 +845,11 @@ copies or substantial portions of the Software.
 
 <div align="center">
 
-**⭐ If you find this project useful, please consider giving it a star!**
+**If you find this project useful, please consider giving it a star!**
 
 **Made with passion for Test Automation**
 
-[⬆ Back to Top](#-e2e-test-automation-framework)
+[⬆ Back to Top](#e2e-test-automation-framework)
 
 </div>
 
@@ -858,4 +857,4 @@ copies or substantial portions of the Software.
 
 **Last Updated:** October 2024  
 **Version:** 1.0.0  
-**Status:** Production Ready ✅
+**Status:** Production Ready
