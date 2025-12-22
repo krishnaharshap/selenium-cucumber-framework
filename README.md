@@ -1,12 +1,12 @@
 # E2E Test Automation Framework
 
 [![Build Status](https://img.shields.io/badge/build-passing-brightgreen)]()
-[![CI](https://github.com/krishnaharshap/selenium-cucumber-framework/actions/workflows/ci.yml/badge.svg)](https://github.com/krishnaharshap/selenium-cucumber-framework/actions)
 [![Coverage](https://img.shields.io/badge/coverage-85%25-green)]()
 [![License](https://img.shields.io/badge/license-MIT-blue.svg)]()
 [![Java](https://img.shields.io/badge/Java-11-orange)]()
 [![Selenium](https://img.shields.io/badge/Selenium-4.15.0-green)]()
 [![Cucumber](https://img.shields.io/badge/Cucumber-7.14.0-brightgreen)]()
+<!---[![CI](https://github.com/krishnaharshap/selenium-cucumber-framework/actions/workflows/ci.yml/badge.svg)](https://github.com/krishnaharshap/selenium-cucumber-framework/actions)--->
 
 **Enterprise-grade test automation framework implementing Page Object Model (POM) design pattern with Behavior-Driven Development (BDD) using Cucumber, Selenium WebDriver, and TestNG. Features dual reporting mechanisms (Allure & Extent), Jenkins CI/CD integration, and cross-browser testing capabilities.**
 
