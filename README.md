@@ -7,30 +7,28 @@
 [![Selenium](https://img.shields.io/badge/Selenium-4.15.0-green)]()
 [![Cucumber](https://img.shields.io/badge/Cucumber-7.14.0-brightgreen)]()
 
-> **Enterprise-grade test automation framework implementing Page Object Model (POM) design pattern with Behavior-Driven Development (BDD) using Cucumber, Selenium WebDriver, and TestNG. Features dual reporting mechanisms (Allure & Extent), Jenkins CI/CD integration, and cross-browser testing capabilities.**
-
----
+**Enterprise-grade test automation framework implementing Page Object Model (POM) design pattern with Behavior-Driven Development (BDD) using Cucumber, Selenium WebDriver, and TestNG. Features dual reporting mechanisms (Allure & Extent), Jenkins CI/CD integration, and cross-browser testing capabilities.**
 
 ## Table of Contents
 
-- [Project Overview](#-project-overview)
-- [Key Features](#-key-features)
-- [Technology Stack](#-technology-stack)
-- [Project Architecture](#-project-architecture)
-- [Prerequisites](#-prerequisites)
-- [Installation & Setup](#-installation--setup)
-- [Project Structure](#-project-structure)
-- [Configuration](#-configuration)
-- [Running Tests](#-running-tests)
-- [Test Reports](#-test-reports)
-- [CI/CD Integration](#-cicd-integration)
-- [Test Coverage](#-test-coverage)
-- [Best Practices](#-best-practices)
-- [Troubleshooting](#-troubleshooting)
-- [Contributing](#-contributing)
-- [Documentation](#-documentation)
-- [License](#-license)
-- [Contact](#-contact)
+- [Project Overview](#project-overview)
+- [Key Features](#key-features)
+- [Technology Stack](#technology-stack)
+- [Project Architecture](#project-architecture)
+- [Prerequisites](#prerequisites)
+- [Installation & Setup](#installation--setup)
+- [Project Structure](#project-structure)
+- [Configuration](#configuration)
+- [Running Tests](#running-tests)
+- [Test Reports](#test-reports)
+- [CI/CD Integration](#cicd-integration)
+- [Test Coverage](#test-coverage)
+- [Best Practices](#best-practices)
+- [Troubleshooting](#troubleshooting)
+- [Contributing](#contributing)
+- [Documentation](#documentation)
+- [License](#license)
+- [Contact](#contact)
 
 ---
 
