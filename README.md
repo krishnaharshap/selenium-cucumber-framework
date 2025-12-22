@@ -1,6 +1,7 @@
 # E2E Test Automation Framework
 
 [![Build Status](https://img.shields.io/badge/build-passing-brightgreen)]()
+[![CI](https://github.com/krishnaharshap/selenium-cucumber-framework/actions/workflows/ci.yml/badge.svg)](https://github.com/krishnaharshap/selenium-cucumber-framework/actions)
 [![Coverage](https://img.shields.io/badge/coverage-85%25-green)]()
 [![License](https://img.shields.io/badge/license-MIT-blue.svg)]()
 [![Java](https://img.shields.io/badge/Java-11-orange)]()
