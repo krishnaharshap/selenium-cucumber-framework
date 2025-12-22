@@ -850,7 +850,7 @@ GitHub: [github.com/krishnaharshap](https://github.com/krishnaharshap)
 
 **Made with passion for Test Automation**
 
-[⬆ Back to Top](#-e2e-test-automation-framework)
+[⬆ Back to Top](#e2e-test-automation-framework)
 
 </div>
 
