@@ -55,18 +55,18 @@ Develop a robust, scalable, and maintainable end-to-end test automation solution
 ## Key Features
 
 ### Core Capabilities
-- ✅ **Page Object Model (POM)** - Industry-standard design pattern for maintainability
-- ✅ **Behavior-Driven Development (BDD)** - Cucumber with Gherkin syntax for business readability
-- ✅ **Dual Reporting** - Allure Reports (technical) + Extent Reports (executive)
-- ✅ **Cross-Browser Testing** - Chrome, Firefox, Edge with headless mode support
-- ✅ **Parallel Execution** - ThreadSafe WebDriver management for concurrent test runs
-- ✅ **CI/CD Ready** - Complete Jenkins pipeline integration with parameterized builds
-- ✅ **Smart Waits** - Explicit wait strategies eliminating test flakiness
-- ✅ **Screenshot Capture** - Automatic screenshot on failure with report integration
-- ✅ **Comprehensive Logging** - Log4j2 with console and file appenders
-- ✅ **Data-Driven Testing** - Externalized test data and configuration management
-- ✅ **Rerun Failed Tests** - Automatic failed scenario retry mechanism
-- ✅ **Tag-Based Execution** - Flexible test suite organization (@Smoke, @Regression, @E2E)
+-  **Page Object Model (POM)** - Industry-standard design pattern for maintainability
+-  **Behavior-Driven Development (BDD)** - Cucumber with Gherkin syntax for business readability
+-  **Dual Reporting** - Allure Reports (technical) + Extent Reports (executive)
+-  **Cross-Browser Testing** - Chrome, Firefox, Edge with headless mode support
+-  **Parallel Execution** - ThreadSafe WebDriver management for concurrent test runs
+-  **CI/CD Ready** - Complete Jenkins pipeline integration with parameterized builds
+-  **Smart Waits** - Explicit wait strategies eliminating test flakiness
+-  **Screenshot Capture** - Automatic screenshot on failure with report integration
+-  **Comprehensive Logging** - Log4j2 with console and file appenders
+-  **Data-Driven Testing** - Externalized test data and configuration management
+-  **Rerun Failed Tests** - Automatic failed scenario retry mechanism
+-  **Tag-Based Execution** - Flexible test suite organization (@Smoke, @Regression, @E2E)
 
 ---
 
@@ -454,47 +454,47 @@ mvn allure:report
 **Report Location:** `target/site/allure-maven-plugin/index.html`
 
 #### Features:
-- ✅ Interactive HTML dashboard
-- ✅ Test execution trends and history
-- ✅ Step-by-step execution breakdown
-- ✅ Screenshot attachments
-- ✅ Timeline and duration metrics
-- ✅ Categorization by severity and features
-- ✅ Environment information
+-  Interactive HTML dashboard
+-  Test execution trends and history
+-  Step-by-step execution breakdown
+-  Screenshot attachments
+-  Timeline and duration metrics
+-  Categorization by severity and features
+-  Environment information
 
 ### Extent Reports
 
 **Report Location:** `test-output/extent-reports/ExtentReport_[timestamp].html`
 
 #### Features:
-- ✅ Executive summary dashboard
-- ✅ Pass/Fail statistics with charts
-- ✅ Pie charts and visual representations
-- ✅ Detailed error logs
-- ✅ Embedded screenshots
-- ✅ System information
-- ✅ Customizable themes
+-  Executive summary dashboard
+-  Pass/Fail statistics with charts
+-  Pie charts and visual representations
+-  Detailed error logs
+-  Embedded screenshots
+-  System information
+-  Customizable themes
 
 ### Cucumber Reports
 
 **Report Location:** `test-output/cucumber-reports/cucumber.html`
 
 #### Features:
-- ✅ Scenario-wise execution details
-- ✅ Step-level pass/fail status
-- ✅ Execution duration
-- ✅ Feature-wise grouping
+-  Scenario-wise execution details
+-  Step-level pass/fail status
+-  Execution duration
+-  Feature-wise grouping
 
 ### Report Comparison
 
 | Feature | Allure | Extent | Cucumber |
 |---------|--------|--------|----------|
-| Visual Dashboard | ✅ | ✅ | ❌ |
-| Historical Trends | ✅ | ❌ | ❌ |
-| Screenshots | ✅ | ✅ | ✅ |
-| Step Details | ✅ | ✅ | ✅ |
-| Charts/Graphs | ✅ | ✅ | ❌ |
-| Executive Summary | ✅ | ✅ | ❌ |
+| Visual Dashboard |  |  | ❌ |
+| Historical Trends |  | ❌ | ❌ |
+| Screenshots |  |  |  |
+| Step Details |  |  |  |
+| Charts/Graphs |  |  | ❌ |
+| Executive Summary |  |  | ❌ |
 
 ---
 
@@ -566,24 +566,24 @@ triggers {
 ### Modules Automated
 
 #### 1. Login Module (6 Scenarios)
-- ✅ Valid login with standard user
-- ✅ Invalid username validation
-- ✅ Invalid password validation
-- ✅ Locked user handling
-- ✅ Step-by-step login flow
-- ✅ Data-driven login scenarios
+-  Valid login with standard user
+-  Invalid username validation
+-  Invalid password validation
+-  Locked user handling
+-  Step-by-step login flow
+-  Data-driven login scenarios
 
 #### 2. Product Management (5 Scenarios)
-- ✅ Add single product to cart
-- ✅ Add multiple products to cart
-- ✅ Remove product from cart
-- ✅ View cart with products
-- ✅ Product count validation
+-  Add single product to cart
+-  Add multiple products to cart
+-  Remove product from cart
+-  View cart with products
+-  Product count validation
 
 #### 3. Checkout Process (3 Scenarios)
-- ✅ Complete E2E purchase flow
-- ✅ Single item checkout
-- ✅ Multi-user checkout validation
+-  Complete E2E purchase flow
+-  Single item checkout
+-  Multi-user checkout validation
 
 ### Coverage Metrics
 
@@ -600,25 +600,25 @@ triggers {
 ## Best Practices
 
 ### Code Quality
-- ✅ Follow SOLID principles
-- ✅ Implement DRY (Don't Repeat Yourself)
-- ✅ Use meaningful variable and method names
-- ✅ Add comments for complex logic
-- ✅ Maintain consistent code formatting
+-  Follow SOLID principles
+-  Implement DRY (Don't Repeat Yourself)
+-  Use meaningful variable and method names
+-  Add comments for complex logic
+-  Maintain consistent code formatting
 
 ### Test Design
-- ✅ Write independent test scenarios
-- ✅ Use appropriate wait strategies
-- ✅ Avoid hard-coded values
-- ✅ Implement proper exception handling
-- ✅ Keep tests atomic and focused
+-  Write independent test scenarios
+-  Use appropriate wait strategies
+-  Avoid hard-coded values
+-  Implement proper exception handling
+-  Keep tests atomic and focused
 
 ### Framework Maintenance
-- ✅ Regular dependency updates
-- ✅ Code review for all changes
-- ✅ Refactor duplicate code
-- ✅ Update documentation
-- ✅ Monitor test flakiness
+-  Regular dependency updates
+-  Code review for all changes
+-  Refactor duplicate code
+-  Update documentation
+-  Monitor test flakiness
 
 ### Naming Conventions
 
@@ -855,6 +855,6 @@ GitHub: [github.com/krishnaharshap](https://github.com/krishnaharshap)
 
 ---
 
-**Last Updated:** October 2024  
+**Last Updated:** December 2025  
 **Version:** 1.0.0  
 **Status:** Production Ready
