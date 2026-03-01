@@ -50,9 +50,20 @@ public class ProductsPage extends BasePage {
 
     @Step("Get total number of products")
     public int getProductCount() {
-        int count = productItems.size();
-        logger.info("Total products found: {}", count);
-        return count;
+        try {
+            // Wait for products to be visible
+            wait.until(ExpectedConditions.presenceOfAllElementsLocatedBy(By.className("inventory_item")));
+            int count = productItems.size();
+            if (count == 0) {
+                logger.warn("No products found on the page");
+                throw new RuntimeException("Products not found on Products page");
+            }
+            logger.info("Total products found: {}", count);
+            return count;
+        } catch (Exception e) {
+            logger.error("Failed to get product count: {}", e.getMessage());
+            throw new RuntimeException("Unable to retrieve product count", e);
+        }
     }
 
     @Step("Add Sauce Labs Backpack to cart")
