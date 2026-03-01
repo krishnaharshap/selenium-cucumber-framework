@@ -38,28 +38,26 @@ public class Hooks {
         waitHelper.waitForPageLoad();
         }
 
-    @After
-    public void tearDown(Scenario scenario) {
-        logger.info("========================================");
-        logger.info("Scenario Status: {}", scenario.getStatus());
-        logger.info("========================================");
-
+@After
+public void tearDown(Scenario scenario) {
+    try {
         if (scenario.isFailed()) {
-            logger.error("Scenario Failed: {}", scenario.getName());
-
-            // Capture screenshot for failed scenarios
+            logger.error("Scenario FAILED: {}", scenario.getName());
             byte[] screenshot = ScreenshotUtil.captureScreenshotAsBytes(driver);
-
-            // Attach to Cucumber report
-            scenario.attach(screenshot, "image/png", scenario.getName());
-
-            // Attach to Allure report
-            Allure.addAttachment(scenario.getName(), new ByteArrayInputStream(screenshot));
-
-            logger.info("Screenshot captured for failed scenario");
+            if (screenshot.length > 0) {
+                Allure.addAttachment("Failed Screenshot", "image/png", 
+                                   new ByteArrayInputStream(screenshot), "png");
+            }
         }
-
-        DriverManager.quitDriver();
-        logger.info("Browser closed successfully");
+    } catch (Exception e) {
+        logger.error("Error during screenshot capture: {}", e.getMessage());
+    } finally {
+        try {
+            DriverManager.quitDriver();
+            logger.info("Driver quit successfully");
+        } catch (Exception e) {
+            logger.error("Error quitting driver: {}", e.getMessage());
+        }
     }
+}
 }
