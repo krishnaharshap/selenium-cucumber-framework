@@ -46,7 +46,12 @@ public class ExcelReader {
     }
 
     public int getColumnCount() {
-        return sheet.getRow(0).getLastCellNum();
+        Row headerRow = sheet.getRow(0);
+        if (headerRow == null) {
+            logger.error("Header row is empty in sheet: {}", sheet.getSheetName());
+            throw new RuntimeException("Header row not found in sheet: " + sheet.getSheetName());
+        }
+        return headerRow.getLastCellNum();
     }
 
     public String getCellData(int rowNum, int colNum) {

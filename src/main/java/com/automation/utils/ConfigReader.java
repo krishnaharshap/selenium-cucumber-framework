@@ -14,8 +14,8 @@ public class ConfigReader {
     private static Properties properties;
 
     static {
-        try {
-            FileInputStream fis = new FileInputStream(FrameworkConstants.CONFIG_FILE_PATH);
+        try (FileInputStream fis = new FileInputStream(FrameworkConstants.CONFIG_FILE_PATH)) {
+            // Using try-with-resources for automatic cleanup
             properties = new Properties();
             properties.load(fis);
             logger.info("Configuration properties loaded successfully");
@@ -53,6 +53,15 @@ public class ConfigReader {
 
     public static int getExplicitWait() {
         String wait = getProperty("explicit.wait");
-        return wait != null ? Integer.parseInt(wait) : FrameworkConstants.EXPLICIT_WAIT_TIMEOUT;
+        if (wait != null && !wait.isEmpty()) {
+            try {
+                return Integer.parseInt(wait);
+            } catch (NumberFormatException e) {
+                logger.warn("Invalid explicit.wait value '{}': {}, using default {}", 
+                           wait, e.getMessage(), FrameworkConstants.EXPLICIT_WAIT_TIMEOUT);
+                return FrameworkConstants.EXPLICIT_WAIT_TIMEOUT;
+            }
+        }
+        return FrameworkConstants.EXPLICIT_WAIT_TIMEOUT;
     }
 }

@@ -34,36 +34,30 @@ public class Hooks {
         driver.get(ConfigReader.getUrl());
         logger.info("Navigated to URL: {}", ConfigReader.getUrl());
 
-        // Wait for page to load completely
-        try {
-            Thread.sleep(3000); // Give page time to fully load
-        } catch (InterruptedException e) {
-            Thread.currentThread().interrupt();
+        // Wait for page load without hard-coded sleep
+        waitHelper.waitForPageLoad();
         }
-    }
 
     @After
     public void tearDown(Scenario scenario) {
-        logger.info("========================================");
-        logger.info("Scenario Status: {}", scenario.getStatus());
-        logger.info("========================================");
-
-        if (scenario.isFailed()) {
-            logger.error("Scenario Failed: {}", scenario.getName());
-
-            // Capture screenshot for failed scenarios
-            byte[] screenshot = ScreenshotUtil.captureScreenshotAsBytes(driver);
-
-            // Attach to Cucumber report
-            scenario.attach(screenshot, "image/png", scenario.getName());
-
-            // Attach to Allure report
-            Allure.addAttachment(scenario.getName(), new ByteArrayInputStream(screenshot));
-
-            logger.info("Screenshot captured for failed scenario");
+        try {
+            if (scenario.isFailed()) {
+                logger.error("Scenario FAILED: {}", scenario.getName());
+                byte[] screenshot = ScreenshotUtil.captureScreenshotAsBytes(driver);
+                if (screenshot.length > 0) {
+                    Allure.addAttachment("Failed Screenshot", "image/png", 
+                                       new ByteArrayInputStream(screenshot), "png");
+                }
+            }
+        } catch (Exception e) {
+            logger.error("Error during screenshot capture: {}", e.getMessage());
+        } finally {
+            try {
+                DriverManager.quitDriver();
+                logger.info("Driver quit successfully");
+            } catch (Exception e) {
+                logger.error("Error quitting driver: {}", e.getMessage());
+            }
         }
-
-        DriverManager.quitDriver();
-        logger.info("Browser closed successfully");
     }
 }

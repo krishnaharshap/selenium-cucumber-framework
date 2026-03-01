@@ -7,7 +7,7 @@ import org.testng.annotations.DataProvider;
 @CucumberOptions(
         features = "src/test/resources/features",
         glue = {"com.automation.stepdefinitions"},
-        tags = "@Regression",
+        tags = "${cucumber.filter.tags:@Regression}",  // Dynamic, defaults to @Regression
         plugin = {
                 "pretty",
                 "html:test-output/cucumber-reports/cucumber.html",

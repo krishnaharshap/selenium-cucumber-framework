@@ -42,7 +42,16 @@ public class ScreenshotUtil {
     }
 
     public static byte[] captureScreenshotAsBytes(WebDriver driver) {
-        TakesScreenshot ts = (TakesScreenshot) driver;
-        return ts.getScreenshotAs(OutputType.BYTES);
+        if (driver == null) {
+            logger.error("WebDriver is null, cannot capture screenshot");
+            return new byte[0];
+        }
+        try {
+            TakesScreenshot ts = (TakesScreenshot) driver;
+            return ts.getScreenshotAs(OutputType.BYTES);
+        } catch (Exception e) {
+            logger.error("Failed to capture screenshot as bytes: {}", e.getMessage());
+            return new byte[0];
+        }
     }
 }
