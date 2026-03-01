@@ -38,26 +38,26 @@ public class Hooks {
         waitHelper.waitForPageLoad();
         }
 
-@After
-public void tearDown(Scenario scenario) {
-    try {
-        if (scenario.isFailed()) {
-            logger.error("Scenario FAILED: {}", scenario.getName());
-            byte[] screenshot = ScreenshotUtil.captureScreenshotAsBytes(driver);
-            if (screenshot.length > 0) {
-                Allure.addAttachment("Failed Screenshot", "image/png", 
-                                   new ByteArrayInputStream(screenshot), "png");
+    @After
+    public void tearDown(Scenario scenario) {
+        try {
+            if (scenario.isFailed()) {
+                logger.error("Scenario FAILED: {}", scenario.getName());
+                byte[] screenshot = ScreenshotUtil.captureScreenshotAsBytes(driver);
+                if (screenshot.length > 0) {
+                    Allure.addAttachment("Failed Screenshot", "image/png", 
+                                       new ByteArrayInputStream(screenshot), "png");
+                }
+            }
+        } catch (Exception e) {
+            logger.error("Error during screenshot capture: {}", e.getMessage());
+        } finally {
+            try {
+                DriverManager.quitDriver();
+                logger.info("Driver quit successfully");
+            } catch (Exception e) {
+                logger.error("Error quitting driver: {}", e.getMessage());
             }
         }
-    } catch (Exception e) {
-        logger.error("Error during screenshot capture: {}", e.getMessage());
-    } finally {
-        try {
-            DriverManager.quitDriver();
-            logger.info("Driver quit successfully");
-        } catch (Exception e) {
-            logger.error("Error quitting driver: {}", e.getMessage());
-        }
     }
-}
 }
