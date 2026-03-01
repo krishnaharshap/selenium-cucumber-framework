@@ -34,13 +34,9 @@ public class Hooks {
         driver.get(ConfigReader.getUrl());
         logger.info("Navigated to URL: {}", ConfigReader.getUrl());
 
-        // Wait for page to load completely
-        try {
-            Thread.sleep(3000); // Give page time to fully load
-        } catch (InterruptedException e) {
-            Thread.currentThread().interrupt();
+        // Wait for page load without hard-coded sleep
+        waitHelper.waitForPageLoad();
         }
-    }
 
     @After
     public void tearDown(Scenario scenario) {
