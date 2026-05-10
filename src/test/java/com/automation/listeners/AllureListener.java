@@ -25,9 +25,11 @@ public class AllureListener implements ITestListener {
     public void onTestFailure(ITestResult result) {
         System.out.println("Test failed: " + result.getName());
 
-        WebDriver driver = DriverManager.getDriver();
-        if (driver != null) {
-            saveScreenshot(driver);
+        if (DriverManager.hasDriver()) {
+            WebDriver driver = DriverManager.getDriver();
+            if (driver != null) {
+                saveScreenshot(driver);
+            }
         }
 
         saveTextLog(getTestMethodName(result) + " failed with exception: " + result.getThrowable());

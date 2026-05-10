@@ -3,7 +3,6 @@
 <suite name="E2E Test Automation Suite" verbose="1" parallel="none">
 
     <listeners>
-        <listener class-name="com.automation.listeners.ExtentReportListener"/>
         <listener class-name="com.automation.listeners.AllureListener"/>
     </listeners>
 
