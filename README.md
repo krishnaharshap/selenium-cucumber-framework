@@ -1,5 +1,28 @@
 # E2E Test Automation Framework
 
+This repository contains a Selenium, Cucumber, and TestNG based automation framework for the SauceDemo sample application. It supports UI testing, a small API testing slice, configurable browser execution, and report generation for local and CI runs.
+
+## Scope
+
+- UI coverage for login, product, cart, and checkout flows.
+- API coverage using RestAssured.
+- Page Object Model structure for maintainable page and step logic.
+- Config-driven execution for browser, URL, waits, and reporting.
+- GitHub Actions and Jenkins support.
+- Failure screenshots and report artifacts.
+
+## Current Test Inventory
+
+| Area | Location | Notes |
+| --- | --- | --- |
+| Login UI | `src/test/resources/features/Login.feature` | Valid and negative login coverage |
+| Product UI | `src/test/resources/features/ProductPurchase.feature` | Cart actions and product count checks |
+| Checkout UI | `src/test/resources/features/E2ECheckout.feature` | End-to-end purchase flow |
+| API | `src/test/resources/features/ApiTesting.feature` | Basic GET and POST checks |
+
+The exact scenario counts are kept in the feature files and can change as the suite grows.
+
+## Stack
 [![CI - Maven Smoke Tests](https://github.com/krishnaharshap/selenium-cucumber-framework/actions/workflows/ci.yml/badge.svg?branch=develop)](https://github.com/krishnaharshap/selenium-cucumber-framework/actions/workflows/ci.yml)
 [![License](https://img.shields.io/badge/license-MIT-blue.svg)]()
 [![Java](https://img.shields.io/badge/Java-11-orange)]()
@@ -211,10 +234,26 @@ Generated directories such as `target/`, `test-output/`, `logs/`, report folders
 - Git.
 
 CI currently uses a Temurin JDK through GitHub Actions.
+## Technology Stack
+
+| Area | Tool |
+| --- | --- |
+| Language | Java |
+| Build | Maven |
+| UI automation | Selenium WebDriver |
+| BDD | Cucumber JVM |
+| Test runner | TestNG |
+| API testing | RestAssured |
+| Driver management | WebDriverManager |
+| Reporting | Allure, Extent, Cucumber HTML/JSON/JUnit |
+| Logging | Log4j2 |
+| CI/CD | GitHub Actions, Jenkins |
+
+Version numbers are defined in `pom.xml`.
 
 ## Configuration
 
-Primary configuration file:
+Primary config file:
 
 ```text
 src/main/resources/config/config.properties
@@ -230,42 +269,33 @@ implicit.wait=10
 explicit.wait=20
 page.load.timeout=30
 take.screenshot.on.failure=true
+api.base.url=https://jsonplaceholder.typicode.com
 ```
 
-The suite supports command-line overrides where implemented by the framework and runner configuration.
+## Running Tests
 
-## Running Tests Locally
-
-Install dependencies and compile:
+Compile the project:
 
 ```bash
 mvn clean compile
 ```
 
-Run all configured tests:
+Run all tests:
 
 ```bash
 mvn clean test
 ```
 
-Run smoke scenarios:
+Run UI smoke tests:
 
 ```bash
 mvn clean test -Dcucumber.filter.tags="@Smoke"
 ```
 
-Run regression scenarios:
+Run API scenarios:
 
 ```bash
-mvn clean test -Dcucumber.filter.tags="@Regression"
-```
-
-Run with a browser selection:
-
-```bash
-mvn clean test -Dbrowser=chrome
-mvn clean test -Dbrowser=firefox
-mvn clean test -Dbrowser=edge
+mvn clean test -Dcucumber.filter.tags="@API"
 ```
 
 Run headless:
@@ -291,7 +321,7 @@ mvn clean test -Dheadless=true
 | Cucumber JSON | `test-output/cucumber-reports/cucumber.json` |
 | Cucumber JUnit XML | `test-output/cucumber-reports/cucumber.xml` |
 | Allure results | `target/allure-results/` |
-| Allure HTML report | `target/site/allure-maven-plugin/index.html` after `mvn allure:report` |
+| Allure report | `target/site/allure-maven-plugin/index.html` |
 | Extent report | `test-output/extent-reports/` |
 | Screenshots | `test-output/screenshots/` |
 
@@ -557,46 +587,44 @@ mvn allure:serve
 
 ## CI/CD
 
-### GitHub Actions
-
-Workflow file:
+GitHub Actions workflow:
 
 ```text
 .github/workflows/ci.yml
 ```
 
-The workflow runs Maven tests for pushes and pull requests targeting the main development branches. Test reports and build artifacts should be reviewed from the workflow run rather than represented as static README claims.
+The workflow is intended to run a headless Chrome smoke suite on pushes and pull requests.
 
-### Jenkins
-
-Pipeline file:
+Jenkins pipeline:
 
 ```text
 Jenkinsfile
 ```
 
-The Jenkins pipeline supports parameterized browser, tag, and headless execution, then publishes available test reports and archives artifacts.
+The Jenkins pipeline supports browser, tag, and headless parameters.
 
-## Branching and Commit Convention
+## Realistic Metrics
 
-Use small branches with clear ownership:
+This README avoids fixed pass-rate and coverage claims. Use the latest workflow run and report artifacts for:
 
-```bash
-feature/<short-description>
-test/<short-description>
-chore/<short-description>
-docs/<short-description>
-fix/<short-description>
-```
+| Metric | Source |
+| --- | --- |
+| Build health | GitHub Actions and Jenkins run results |
+| Scenario results | Cucumber, Allure, Extent, and Surefire outputs |
+| Execution duration | CI job timestamps |
+| Failed scenario evidence | Screenshots and rerun output |
 
-Copyright (c) 2024 Krishna Harsha
+## Repository Layout
 
 ```text
-feat: add api smoke test coverage
-fix: stabilize checkout wait condition
-test: externalize saucedemo test data
-chore: refresh framework dependencies
-docs: update ci usage notes
+selenium-cucumber-framework/
+├── .github/workflows/ci.yml
+├── Jenkinsfile
+├── pom.xml
+├── testng.xml
+├── src/main/java/com/automation/
+├── src/main/resources/
+└── src/test/
 ```
 
 ---
@@ -658,7 +686,9 @@ Avoid documenting mobile, visual, performance, database, or container automation
 
 ## Repository
 
-GitHub: https://github.com/krishnaharshap/selenium-cucumber-framework
+- Keep generated reports, screenshots, logs, and local IDE files out of Git.
+- Keep branch names short and descriptive.
+- Update this README when the framework structure or CI flow changes.
 
 **Last Updated:** May 2026  
 **Version:** 1.0.0  
