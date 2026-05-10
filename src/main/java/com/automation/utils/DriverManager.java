@@ -30,6 +30,10 @@ public class DriverManager {
         return driver.get();
     }
 
+    public static boolean hasDriver() {
+        return driver.get() != null;
+    }
+
     private static void initializeDriver() {
         String browser = ConfigReader.getBrowser();
         logger.info("Initializing {} driver", browser);
