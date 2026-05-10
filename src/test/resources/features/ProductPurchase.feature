@@ -6,7 +6,7 @@ Feature: Product Management and Cart Functionality
 
   Background:
     Given user is on the login page
-    When user logs in with username "standard_user" and password "secret_sauce"
+    When user logs in with username "users.standard.username" and password "users.valid.password"
     Then user should be redirected to products page
 
   @Smoke @Positive

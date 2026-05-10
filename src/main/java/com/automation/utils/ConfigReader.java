@@ -47,6 +47,10 @@ public class ConfigReader {
         return getProperty("url");
     }
 
+    public static String getApiBaseUrl() {
+        return getProperty("api.base.url");
+    }
+
     public static boolean isHeadless() {
         return Boolean.parseBoolean(getProperty("headless"));
     }
