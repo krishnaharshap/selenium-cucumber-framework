@@ -3,6 +3,7 @@ package com.automation.stepdefinitions;
 import com.automation.utils.ConfigReader;
 import com.automation.utils.DriverManager;
 import com.automation.utils.ScreenshotUtil;
+import com.automation.utils.WaitHelper;
 import io.cucumber.java.After;
 import io.cucumber.java.Before;
 import io.cucumber.java.Scenario;
@@ -25,6 +26,11 @@ public class Hooks {
         logger.info("Starting Scenario: {}", scenario.getName());
         logger.info("========================================");
 
+        if (isApiScenario(scenario)) {
+            logger.info("Skipping WebDriver setup for API scenario: {}", scenario.getName());
+            return;
+        }
+
         driver = DriverManager.getDriver();
 
         // Add explicit page load timeout
@@ -35,11 +41,16 @@ public class Hooks {
         logger.info("Navigated to URL: {}", ConfigReader.getUrl());
 
         // Wait for page load without hard-coded sleep
-        waitHelper.waitForPageLoad();
-        }
+        new WaitHelper(driver).waitForPageLoad();
+    }
 
     @After
     public void tearDown(Scenario scenario) {
+        if (isApiScenario(scenario)) {
+            logger.info("Skipping WebDriver teardown for API scenario: {}", scenario.getName());
+            return;
+        }
+
         try {
             if (scenario.isFailed()) {
                 logger.error("Scenario FAILED: {}", scenario.getName());
@@ -59,5 +70,9 @@ public class Hooks {
                 logger.error("Error quitting driver: {}", e.getMessage());
             }
         }
+    }
+
+    private boolean isApiScenario(Scenario scenario) {
+        return scenario.getSourceTagNames().contains("@API");
     }
 }

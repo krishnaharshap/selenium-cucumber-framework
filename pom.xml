@@ -22,6 +22,7 @@
         <testng.version>7.8.0</testng.version>
         <allure.version>2.24.0</allure.version>
         <extent.version>5.1.1</extent.version>
+        <restassured.version>5.5.7</restassured.version>
         <webdrivermanager.version>5.6.2</webdrivermanager.version>
         <log4j.version>2.20.0</log4j.version>
         <aspectj.version>1.9.20</aspectj.version>
@@ -99,6 +100,14 @@
             <groupId>tech.grasshopper</groupId>
             <artifactId>extentreports-cucumber7-adapter</artifactId>
             <version>1.14.0</version>
+        </dependency>
+
+        <!-- API Testing -->
+        <dependency>
+            <groupId>io.rest-assured</groupId>
+            <artifactId>rest-assured</artifactId>
+            <version>${restassured.version}</version>
+            <scope>test</scope>
         </dependency>
 
         <!-- Log4j -->
