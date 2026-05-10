@@ -1,52 +1,57 @@
-name: CI - Maven Java Tests
+name: CI - Maven Smoke Tests
 
-# Run on pushes and pull requests to develop & main
 on:
   push:
     branches:
       - develop
       - main
+      - "feature/**"
+      - "feat/**"
+      - "test/**"
+      - "chore/**"
+      - "docs/**"
   pull_request:
     branches:
       - develop
       - main
 
+permissions:
+  contents: read
+
 jobs:
-  build-and-test:
-    name: Build and Run Tests
+  smoke-tests:
+    name: Chrome Headless Smoke
     runs-on: ubuntu-latest
+    timeout-minutes: 20
 
     steps:
-      # 1. Checkout the code
       - name: Checkout repository
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
-      # 2. Cache Maven dependencies for faster runs
-      - name: Set up Java & Cache Maven Dependencies
+      - name: Set up Java
         uses: actions/setup-java@v4
         with:
-          java-version: '17'
-          distribution: 'temurin'
+          java-version: "17"
+          distribution: temurin
           cache: maven
 
-      # 3. Display environment info (optional, helps debug)
-      - name: Show environment info
+      - name: Show tool versions
         run: |
           java -version
           mvn -version
+          google-chrome --version || true
 
-      # 4. Build and run tests
-      - name: Build with Maven
-        run: mvn clean test --batch-mode
+      - name: Run smoke tests
+        run: mvn -B -ntp test -Dbrowser=chrome -Dheadless=true "-Dcucumber.filter.tags=@Smoke"
 
-      # 5. Upload test results/artifacts (optional)
       - name: Upload test reports
         if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: test-reports
+          name: smoke-test-reports
           path: |
-            **/target/*.xml
-            **/target/*.html
-            **/target/cucumber-reports/
-            **/target/allure-results/
+            target/surefire-reports/
+            target/allure-results/
+            test-output/cucumber-reports/
+            test-output/screenshots/
+          if-no-files-found: ignore
