@@ -43,8 +43,8 @@ Develop a robust, scalable, and maintainable end-to-end test automation solution
 [https://www.saucedemo.com](https://www.saucedemo.com)
 
 ### Project Metrics
-- **Execution Time:** 18 minutes (Full Regression Suite)
-- **Test Scenarios:** 14+ automated scenarios
+- **Execution Time:** ~18 minutes (Full Regression Suite)
+- **Total Scenarios** [Active Scenarios](https://github.com/krishnaharshap/selenium-cucumber-framework/tree/ef39a16e06e27a3ad59fe9c552720cdf66d3630b/src/test/resources/features)
 - **Pass Rate:** 94% (Consistent over 3 months)
 - **Flakiness Rate:** 2% (Reduced from 12%)
 - **Time Savings:** 95% reduction in regression testing time
@@ -55,18 +55,18 @@ Develop a robust, scalable, and maintainable end-to-end test automation solution
 ## Key Features
 
 ### Core Capabilities
-- ✅ **Page Object Model (POM)** - Industry-standard design pattern for maintainability
-- ✅ **Behavior-Driven Development (BDD)** - Cucumber with Gherkin syntax for business readability
-- ✅ **Dual Reporting** - Allure Reports (technical) + Extent Reports (executive)
-- ✅ **Cross-Browser Testing** - Chrome, Firefox, Edge with headless mode support
-- ✅ **Parallel Execution** - ThreadSafe WebDriver management for concurrent test runs
-- ✅ **CI/CD Ready** - Complete Jenkins pipeline integration with parameterized builds
-- ✅ **Smart Waits** - Explicit wait strategies eliminating test flakiness
-- ✅ **Screenshot Capture** - Automatic screenshot on failure with report integration
-- ✅ **Comprehensive Logging** - Log4j2 with console and file appenders
-- ✅ **Data-Driven Testing** - Externalized test data and configuration management
-- ✅ **Rerun Failed Tests** - Automatic failed scenario retry mechanism
-- ✅ **Tag-Based Execution** - Flexible test suite organization (@Smoke, @Regression, @E2E)
+-  **Page Object Model (POM)** - Industry-standard design pattern for maintainability
+-  **Behavior-Driven Development (BDD)** - Cucumber with Gherkin syntax for business readability
+-  **Dual Reporting** - Allure Reports (technical) + Extent Reports (executive)
+-  **Cross-Browser Testing** - Chrome, Firefox, Edge with headless mode support
+-  **Parallel Execution** - ThreadSafe WebDriver management for concurrent test runs
+-  **CI/CD Ready** - Complete Jenkins pipeline integration with parameterized builds
+-  **Smart Waits** - Explicit wait strategies eliminating test flakiness
+-  **Screenshot Capture** - Automatic screenshot on failure with report integration
+-  **Comprehensive Logging** - Log4j2 with console and file appenders
+-  **Data-Driven Testing** - Externalized test data and configuration management
+-  **Rerun Failed Tests** - Automatic failed scenario retry mechanism
+-  **Tag-Based Execution** - Flexible test suite organization (@Smoke, @Regression, @E2E)
 
 ---
 
@@ -428,13 +428,16 @@ mvn clean test -Dcucumber.filter.tags="@Smoke" -Dbrowser=chrome -Dheadless=true
 
 ### Test Execution Strategies
 
-| Strategy | Tag | Duration | Use Case |
-|----------|-----|----------|----------|
-| **Smoke** | `@Smoke` | 5-7 min | Quick validation on every commit |
-| **Regression** | `@Regression` | 15-20 min | Complete validation before release |
-| **E2E** | `@E2E` | 10-12 min | Business flow validation |
-| **Positive** | `@Positive` | - | Happy path scenarios |
-| **Negative** | `@Negative` | - | Error handling validation |
+| Strategy | Tag | Implementation | Use Case |
+|----------|-----|-----------------|----------|
+| **Smoke** | [`@Smoke`](https://github.com/krishnaharshap/selenium-cucumber-framework/blob/ef39a16e06e27a3ad59fe9c552720cdf66d3630b/src/test/resources/features/Login.feature#L10) | 3 scenarios | Quick validation |
+| **Regression** | [`@Regression`](https://github.com/krishnaharshap/selenium-cucumber-framework/blob/ef39a16e06e27a3ad59fe9c552720cdf66d3630b/src/test/resources/features/Login.feature#L1) | 16 scenarios | Full validation |
+| **E2E** | [`@E2E`](https://github.com/krishnaharshap/selenium-cucumber-framework/blob/ef39a16e06e27a3ad59fe9c552720cdf66d3630b/src/test/resources/features/E2ECheckout.feature#L1) | 5 scenarios | End-to-end flows |
+| **Critical** | [`@Critical`](https://github.com/krishnaharshap/selenium-cucumber-framework/blob/ef39a16e06e27a3ad59fe9c552720cdf66d3630b/src/test/resources/features/E2ECheckout.feature#L7) | 2 scenarios | Business-critical tests |
+| **Positive** | [`@Positive`](https://github.com/krishnaharshap/selenium-cucumber-framework/search?q=@Positive&type=code) | Happy paths | Success scenarios |
+| **Negative** | [`@Negative`](https://github.com/krishnaharshap/selenium-cucumber-framework/search?q=@Negative&type=code) | Error handling | Validation scenarios |
+| **Module** | `@Login`, `@Product` | Module-specific | Targeted testing |
+| **Dryrun** | [`@Dryrun`](https://github.com/krishnaharshap/selenium-cucumber-framework/blob/ef39a16e06e27a3ad59fe9c552720cdf66d3630b/src/test/resources/features/E2ECheckout.feature#L22) | Pre-execution | Validation checks |
 
 ---
 
@@ -454,47 +457,47 @@ mvn allure:report
 **Report Location:** `target/site/allure-maven-plugin/index.html`
 
 #### Features:
-- ✅ Interactive HTML dashboard
-- ✅ Test execution trends and history
-- ✅ Step-by-step execution breakdown
-- ✅ Screenshot attachments
-- ✅ Timeline and duration metrics
-- ✅ Categorization by severity and features
-- ✅ Environment information
+-  Interactive HTML dashboard
+-  Test execution trends and history
+-  Step-by-step execution breakdown
+-  Screenshot attachments
+-  Timeline and duration metrics
+-  Categorization by severity and features
+-  Environment information
 
 ### Extent Reports
 
 **Report Location:** `test-output/extent-reports/ExtentReport_[timestamp].html`
 
 #### Features:
-- ✅ Executive summary dashboard
-- ✅ Pass/Fail statistics with charts
-- ✅ Pie charts and visual representations
-- ✅ Detailed error logs
-- ✅ Embedded screenshots
-- ✅ System information
-- ✅ Customizable themes
+-  Executive summary dashboard
+-  Pass/Fail statistics with charts
+-  Pie charts and visual representations
+-  Detailed error logs
+-  Embedded screenshots
+-  System information
+-  Customizable themes
 
 ### Cucumber Reports
 
 **Report Location:** `test-output/cucumber-reports/cucumber.html`
 
 #### Features:
-- ✅ Scenario-wise execution details
-- ✅ Step-level pass/fail status
-- ✅ Execution duration
-- ✅ Feature-wise grouping
+-  Scenario-wise execution details
+-  Step-level pass/fail status
+-  Execution duration
+-  Feature-wise grouping
 
 ### Report Comparison
 
 | Feature | Allure | Extent | Cucumber |
 |---------|--------|--------|----------|
-| Visual Dashboard | ✅ | ✅ | ❌ |
-| Historical Trends | ✅ | ❌ | ❌ |
-| Screenshots | ✅ | ✅ | ✅ |
-| Step Details | ✅ | ✅ | ✅ |
-| Charts/Graphs | ✅ | ✅ | ❌ |
-| Executive Summary | ✅ | ✅ | ❌ |
+| Visual Dashboard |  |  | ❌ |
+| Historical Trends |  | ❌ | ❌ |
+| Screenshots |  |  |  |
+| Step Details |  |  |  |
+| Charts/Graphs |  |  | ❌ |
+| Executive Summary |  |  | ❌ |
 
 ---
 
@@ -566,33 +569,33 @@ triggers {
 ### Modules Automated
 
 #### 1. Login Module (6 Scenarios)
-- ✅ Valid login with standard user
-- ✅ Invalid username validation
-- ✅ Invalid password validation
-- ✅ Locked user handling
-- ✅ Step-by-step login flow
-- ✅ Data-driven login scenarios
+-  Valid login with standard user
+-  Invalid username validation
+-  Invalid password validation
+-  Locked user handling
+-  Step-by-step login flow
+-  Data-driven login scenarios
 
 #### 2. Product Management (5 Scenarios)
-- ✅ Add single product to cart
-- ✅ Add multiple products to cart
-- ✅ Remove product from cart
-- ✅ View cart with products
-- ✅ Product count validation
+-  Add single product to cart
+-  Add multiple products to cart
+-  Remove product from cart
+-  View cart with products
+-  Product count validation
 
 #### 3. Checkout Process (3 Scenarios)
-- ✅ Complete E2E purchase flow
-- ✅ Single item checkout
-- ✅ Multi-user checkout validation
+-  Complete E2E purchase flow
+-  Single item checkout
+-  Multi-user checkout validation
 
-### Coverage Metrics
+### Test Execution Metrics
 
 | Metric | Value |
 |--------|-------|
-| **Total Scenarios** | 14+ |
-| **Functional Coverage** | 85% |
-| **Critical Path Coverage** | 100% |
-| **Pass Rate** | 94% |
+| **Total Scenarios** | [Active Scenarios](https://github.com/krishnaharshap/selenium-cucumber-framework/tree/ef39a16e06e27a3ad59fe9c552720cdf66d3630b/src/test/resources/features) |
+| **View live test runs** | [GitHub Actions Workflow](https://github.com/krishnaharshap/selenium-cucumber-framework/actions) |
+| **Recent changes** | [Commit History](https://github.com/krishnaharshap/selenium-cucumber-framework/commits/main) |
+| **Development activity** | [Network Graph](https://github.com/krishnaharshap/selenium-cucumber-framework/network) |
 | **Automated vs Manual** | 70:30 |
 
 ---
@@ -600,25 +603,25 @@ triggers {
 ## Best Practices
 
 ### Code Quality
-- ✅ Follow SOLID principles
-- ✅ Implement DRY (Don't Repeat Yourself)
-- ✅ Use meaningful variable and method names
-- ✅ Add comments for complex logic
-- ✅ Maintain consistent code formatting
+-  Follow SOLID principles
+-  Implement DRY (Don't Repeat Yourself)
+-  Use meaningful variable and method names
+-  Add comments for complex logic
+-  Maintain consistent code formatting
 
 ### Test Design
-- ✅ Write independent test scenarios
-- ✅ Use appropriate wait strategies
-- ✅ Avoid hard-coded values
-- ✅ Implement proper exception handling
-- ✅ Keep tests atomic and focused
+-  Write independent test scenarios
+-  Use appropriate wait strategies
+-  Avoid hard-coded values
+-  Implement proper exception handling
+-  Keep tests atomic and focused
 
 ### Framework Maintenance
-- ✅ Regular dependency updates
-- ✅ Code review for all changes
-- ✅ Refactor duplicate code
-- ✅ Update documentation
-- ✅ Monitor test flakiness
+-  Regular dependency updates
+-  Code review for all changes
+-  Refactor duplicate code
+-  Update documentation
+-  Monitor test flakiness
 
 ### Naming Conventions
 
@@ -777,7 +780,7 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 ```
 MIT License
 
-Copyright (c) 2024 [Your Name]
+Copyright (c) 2024 Krishna Harsha
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -797,7 +800,7 @@ copies or substantial portions of the Software.
 ### Project Maintainer
 **Krishna Harsha**  
 Email: krishnaharshap11@gmail.com  
-LinkedIn: [linkedin.com/in/krishnap](https://linkedin.com/in/krishnap)  
+LinkedIn: [linkedin.com/in/krishnap](https://linkedin.com/in/krishna-p-472514236)  
 GitHub: [github.com/krishnaharshap](https://github.com/krishnaharshap)
 
 ### Support Channels
@@ -855,6 +858,9 @@ GitHub: [github.com/krishnaharshap](https://github.com/krishnaharshap)
 
 ---
 
-**Last Updated:** October 2024  
-**Version:** 1.0.0  
-**Status:** Production Ready
+**Last Updated:** [February 2026](https://github.com/krishnaharshap/selenium-cucumber-framework/commits/main)  
+**Latest Changes:** [View Commit History](https://github.com/krishnaharshap/selenium-cucumber-framework/commits/main)
+**Version** [1.0-SNAPSHOT](https://github.com/krishnaharshap/selenium-cucumber-framework/blob/ef39a16e06e27a3ad59fe9c552720cdf66d3630b/pom.xml#L10)
+**Status** [Active Development](https://github.com/krishnaharshap/selenium-cucumber-framework/commits/main)
+**Last Commit** [ef39a16](https://github.com/krishnaharshap/selenium-cucumber-framework/commit/ef39a16e06e27a3ad59fe9c552720cdf66d3630b)
+**Java Support** [11+](https://github.com/krishnaharshap/selenium-cucumber-framework/blob/ef39a16e06e27a3ad59fe9c552720cdf66d3630b/pom.xml#L19)
