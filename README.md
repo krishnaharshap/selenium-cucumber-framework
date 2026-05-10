@@ -1,13 +1,10 @@
 # E2E Test Automation Framework
 
-[![CI - Maven Java Tests](https://github.com/krishnaharshap/selenium-cucumber-framework/actions/workflows/ci.yml/badge.svg?branch=develop)](https://github.com/krishnaharshap/selenium-cucumber-framework/actions/workflows/ci.yml)
-[![Build Status](https://img.shields.io/badge/build-passing-brightgreen)]()
-[![Coverage](https://img.shields.io/badge/coverage-85%25-green)]()
+[![CI - Maven Smoke Tests](https://github.com/krishnaharshap/selenium-cucumber-framework/actions/workflows/ci.yml/badge.svg?branch=develop)](https://github.com/krishnaharshap/selenium-cucumber-framework/actions/workflows/ci.yml)
 [![License](https://img.shields.io/badge/license-MIT-blue.svg)]()
 [![Java](https://img.shields.io/badge/Java-11-orange)]()
 [![Selenium](https://img.shields.io/badge/Selenium-4.15.0-green)]()
 [![Cucumber](https://img.shields.io/badge/Cucumber-7.14.0-brightgreen)]()
-<!---[![CI](https://github.com/krishnaharshap/selenium-cucumber-framework/actions/workflows/ci.yml/badge.svg)](https://github.com/krishnaharshap/selenium-cucumber-framework/actions)--->
 
 **Enterprise-grade test automation framework implementing Page Object Model (POM) design pattern with Behavior-Driven Development (BDD) using Cucumber, Selenium WebDriver, and TestNG. Features dual reporting mechanisms (Allure & Extent), Jenkins CI/CD integration, and cross-browser testing capabilities.**
 
@@ -44,12 +41,10 @@ Develop a robust, scalable, and maintainable end-to-end test automation solution
 [https://www.saucedemo.com](https://www.saucedemo.com)
 
 ### Project Metrics
-- **Execution Time:** ~18 minutes (Full Regression Suite)
-- **Total Scenarios** [Active Scenarios](https://github.com/krishnaharshap/selenium-cucumber-framework/tree/ef39a16e06e27a3ad59fe9c552720cdf66d3630b/src/test/resources/features)
-- **Pass Rate:** 94% (Consistent over 3 months)
-- **Flakiness Rate:** 2% (Reduced from 12%)
-- **Time Savings:** 95% reduction in regression testing time
-- **Defect Reduction:** 45% decrease in production defects
+- **Build Health:** Reported by the GitHub Actions CI badge above
+- **CI Scope:** Chrome headless smoke suite on push and pull request
+- **Test Scenarios:** 14+ UI scenarios across login, product, and checkout flows
+- **Reports:** Surefire, Cucumber, screenshots, and Allure results uploaded as workflow artifacts
 
 ---
 
@@ -248,6 +243,214 @@ mvn allure:report
 
 Serve an Allure report locally:
 
+#### Features:
+-  Interactive HTML dashboard
+-  Test execution trends and history
+-  Step-by-step execution breakdown
+-  Screenshot attachments
+-  Timeline and duration metrics
+-  Categorization by severity and features
+-  Environment information
+
+### Extent Reports
+
+**Report Location:** `test-output/extent-reports/ExtentReport_[timestamp].html`
+
+#### Features:
+-  Executive summary dashboard
+-  Pass/Fail statistics with charts
+-  Pie charts and visual representations
+-  Detailed error logs
+-  Embedded screenshots
+-  System information
+-  Customizable themes
+
+### Cucumber Reports
+
+**Report Location:** `test-output/cucumber-reports/cucumber.html`
+
+#### Features:
+-  Scenario-wise execution details
+-  Step-level pass/fail status
+-  Execution duration
+-  Feature-wise grouping
+
+### Report Comparison
+
+| Feature | Allure | Extent | Cucumber |
+|---------|--------|--------|----------|
+| Visual Dashboard | ✅ | ✅ | ❌ |
+| Historical Trends | ✅ | ❌ | ❌ |
+| Screenshots | ✅ | ✅ | ✅ |
+| Step Details | ✅ | ✅ | ✅ |
+| Charts/Graphs | ✅ | ✅ | ❌ |
+| Executive Summary | ✅ | ✅ | ❌ |
+
+---
+
+## CI/CD Integration
+
+### GitHub Actions
+
+**File:** `.github/workflows/ci.yml`
+
+The primary CI workflow runs a Chrome headless smoke suite on pushes to long-lived and review branches, and on pull requests into `develop` or `main`.
+
+```bash
+mvn -B -ntp test -Dbrowser=chrome -Dheadless=true "-Dcucumber.filter.tags=@Smoke"
+```
+
+Workflow artifacts include Surefire reports, Cucumber reports, screenshots, and Allure results when available.
+
+### Jenkins Pipeline
+
+**File:** `Jenkinsfile`
+
+#### Pipeline Stages:
+1. **Checkout** - Clone repository from SCM
+2. **Clean** - Remove previous build artifacts
+3. **Compile** - Compile source code
+4. **Run Tests** - Execute test suite with parameters
+5. **Generate Reports** - Create Allure and Extent reports
+6. **Post Actions** - Publish reports and send notifications
+
+#### Parameterized Build
+
+| Parameter | Type | Options | Description |
+|-----------|------|---------|-------------|
+| BROWSER | Choice | chrome, firefox, edge | Browser for execution |
+| TAGS | Choice | @Smoke, @Regression, @E2E | Test tags to execute |
+| HEADLESS | Boolean | true, false | Headless mode toggle |
+
+#### Jenkins Setup
+
+```groovy
+pipeline {
+    agent any
+    
+    parameters {
+        choice(name: 'BROWSER', choices: ['chrome', 'firefox', 'edge'])
+        choice(name: 'TAGS', choices: ['@Smoke', '@Regression', '@E2E'])
+        booleanParam(name: 'HEADLESS', defaultValue: false)
+    }
+    
+    stages {
+        stage('Run Tests') {
+            steps {
+                bat "mvn clean test -Dbrowser=${BROWSER} -Dcucumber.filter.tags=${TAGS}"
+            }
+        }
+    }
+}
+```
+
+#### Report Publishing
+- Allure Reports published via Allure Jenkins Plugin
+- Extent Reports published via HTML Publisher Plugin
+- Cucumber Reports archived as build artifacts
+
+#### Email Notifications
+- Success emails with report links
+- Failure emails with console output
+- Configurable recipient list
+
+### Scheduled Builds
+```groovy
+triggers {
+    cron('H 2 * * 1-5')  // Nightly at 2 AM, weekdays
+}
+```
+
+---
+
+## Test Coverage
+
+### Modules Automated
+
+#### 1. Login Module (6 Scenarios)
+-  Valid login with standard user
+-  Invalid username validation
+-  Invalid password validation
+-  Locked user handling
+-  Step-by-step login flow
+-  Data-driven login scenarios
+
+#### 2. Product Management (5 Scenarios)
+-  Add single product to cart
+-  Add multiple products to cart
+-  Remove product from cart
+-  View cart with products
+-  Product count validation
+
+#### 3. Checkout Process (3 Scenarios)
+-  Complete E2E purchase flow
+-  Single item checkout
+-  Multi-user checkout validation
+
+### Coverage Metrics
+
+| Metric | Value |
+|--------|-------|
+| **Total Scenarios** | 14+ |
+| **Functional Coverage** | Track through CI artifacts and test inventory |
+| **Critical Path Coverage** | Login, cart, and checkout smoke paths |
+| **Pass Rate** | Reported by GitHub Actions and Jenkins runs |
+| **Automated vs Manual** | Review per release scope |
+
+---
+
+## Best Practices
+
+### Code Quality
+-  Follow SOLID principles
+-  Implement DRY (Don't Repeat Yourself)
+-  Use meaningful variable and method names
+-  Add comments for complex logic
+-  Maintain consistent code formatting
+
+### Test Design
+-  Write independent test scenarios
+-  Use appropriate wait strategies
+-  Avoid hard-coded values
+-  Implement proper exception handling
+-  Keep tests atomic and focused
+
+### Framework Maintenance
+-  Regular dependency updates
+-  Code review for all changes
+-  Refactor duplicate code
+-  Update documentation
+-  Monitor test flakiness
+
+### Naming Conventions
+
+```java
+// Page Objects
+public class LoginPage extends BasePage {}
+
+// Step Definitions
+@Given("user is on the login page")
+public void userIsOnTheLoginPage() {}
+
+// Feature Files
+Feature: User Login Functionality
+  Scenario: Successful login with valid credentials
+```
+
+---
+
+## Troubleshooting
+
+### Common Issues & Solutions
+
+#### Issue 1: Maven Dependencies Not Downloading
+```bash
+# Solution
+mvn dependency:purge-local-repository
+mvn clean install -U
+```
+
+#### Issue 2: WebDriver Not Found
 ```bash
 mvn allure:serve
 ```
@@ -358,4 +561,7 @@ Avoid documenting mobile, visual, performance, database, or container automation
 
 GitHub: https://github.com/krishnaharshap/selenium-cucumber-framework
 
-Maintainer: Krishna Harsha
+**Last Updated:** May 2026  
+**Version:** 1.0.0  
+**Status:** Active
+**Maintainer:** Krishna Harsha
