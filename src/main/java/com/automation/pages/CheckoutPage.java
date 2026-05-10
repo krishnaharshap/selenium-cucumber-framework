@@ -71,7 +71,17 @@ public class CheckoutPage extends BasePage {
 
     @Step("Enter checkout information - First Name: {firstName}, Last Name: {lastName}, Postal Code: {postalCode}")
     public CheckoutPage enterCheckoutInformation(String firstName, String lastName, String postalCode) {
-        logger.info("Entering checkout information");
+        if (firstName == null || firstName.trim().isEmpty()) {
+            throw new IllegalArgumentException("First name cannot be empty");
+        }
+        if (lastName == null || lastName.trim().isEmpty()) {
+            throw new IllegalArgumentException("Last name cannot be empty");
+        }
+        if (postalCode == null || postalCode.trim().isEmpty()) {
+            throw new IllegalArgumentException("Postal code cannot be empty");
+        }
+        
+        logger.info("Entering checkout information: {} {}", firstName, lastName);
         sendKeys(firstNameField, firstName);
         sendKeys(lastNameField, lastName);
         sendKeys(postalCodeField, postalCode);

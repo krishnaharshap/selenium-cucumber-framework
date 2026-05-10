@@ -1,9 +1,12 @@
 package com.automation.pages;
 
 import io.qameta.allure.Step;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 
 import java.util.List;
 
@@ -50,9 +53,20 @@ public class ProductsPage extends BasePage {
 
     @Step("Get total number of products")
     public int getProductCount() {
-        int count = productItems.size();
-        logger.info("Total products found: {}", count);
-        return count;
+        try {
+            // Wait for products to be visible
+            wait.until(ExpectedConditions.presenceOfAllElementsLocatedBy(By.className("inventory_item")));
+            int count = productItems.size();
+            if (count == 0) {
+                logger.warn("No products found on the page");
+                throw new RuntimeException("Products not found on Products page");
+            }
+            logger.info("Total products found: {}", count);
+            return count;
+        } catch (Exception e) {
+            logger.error("Failed to get product count: {}", e.getMessage());
+            throw new RuntimeException("Unable to retrieve product count", e);
+        }
     }
 
     @Step("Add Sauce Labs Backpack to cart")

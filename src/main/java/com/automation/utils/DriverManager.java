@@ -22,9 +22,16 @@ public class DriverManager {
 
     public static synchronized WebDriver getDriver() {
         if (driver.get() == null) {
+            logger.debug("WebDriver not initialized, initializing now");
             initializeDriver();
+        } else {
+            logger.debug("WebDriver already initialized, returning existing instance");
         }
         return driver.get();
+    }
+
+    public static boolean hasDriver() {
+        return driver.get() != null;
     }
 
     private static void initializeDriver() {

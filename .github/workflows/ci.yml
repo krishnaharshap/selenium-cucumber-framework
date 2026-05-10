@@ -1,0 +1,57 @@
+name: CI - Maven Smoke Tests
+
+on:
+  push:
+    branches:
+      - develop
+      - main
+      - "feature/**"
+      - "feat/**"
+      - "test/**"
+      - "chore/**"
+      - "docs/**"
+  pull_request:
+    branches:
+      - develop
+      - main
+
+permissions:
+  contents: read
+
+jobs:
+  smoke-tests:
+    name: Chrome Headless Smoke
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Java
+        uses: actions/setup-java@v4
+        with:
+          java-version: "17"
+          distribution: temurin
+          cache: maven
+
+      - name: Show tool versions
+        run: |
+          java -version
+          mvn -version
+          google-chrome --version || true
+
+      - name: Run smoke tests
+        run: mvn -B -ntp test -Dbrowser=chrome -Dheadless=true "-Dcucumber.filter.tags=@Smoke"
+
+      - name: Upload test reports
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: smoke-test-reports
+          path: |
+            target/surefire-reports/
+            target/allure-results/
+            test-output/cucumber-reports/
+            test-output/screenshots/
+          if-no-files-found: ignore

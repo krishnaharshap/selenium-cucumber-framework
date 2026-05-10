@@ -28,15 +28,26 @@ public class BasePage {
     }
 
     protected void click(By locator) {
-        WebElement element = wait.until(ExpectedConditions.elementToBeClickable(locator));
-        element.click();
-        logger.info("Clicked on element: {}", locator);
+        try {
+            WebElement element = wait.until(ExpectedConditions.elementToBeClickable(locator));
+            element.click();
+            logger.info("Clicked on element: {}", locator);
+        } catch (org.openqa.selenium.ElementClickInterceptedException e) {
+            logger.warn("Element click intercepted for {}, retrying with JavaScript", locator);
+            WebElement element = driver.findElement(locator);
+            jsClick(element);
+        }
     }
-
+    
     protected void click(WebElement element) {
-        wait.until(ExpectedConditions.elementToBeClickable(element));
-        element.click();
-        logger.info("Clicked on element");
+        try {
+            wait.until(ExpectedConditions.elementToBeClickable(element));
+            element.click();
+            logger.info("Clicked on element");
+        } catch (org.openqa.selenium.ElementClickInterceptedException e) {
+            logger.warn("Element click intercepted, retrying with JavaScript click");
+            jsClick(element);
+        }
     }
 
     protected void sendKeys(By locator, String text) {

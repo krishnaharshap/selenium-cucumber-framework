@@ -2,6 +2,7 @@ package com.automation.stepdefinitions;
 
 import com.automation.pages.CheckoutPage;
 import com.automation.utils.DriverManager;
+import com.automation.utils.TestDataReader;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.apache.logging.log4j.LogManager;
@@ -34,13 +35,16 @@ public class CheckoutSteps {
     @When("user enters first name {string}")
     public void userEntersFirstName(String firstName) {
         logger.info("Step: User enters first name: {}", firstName);
-        checkoutPage.enterCheckoutInformation(firstName, "", "");
+        checkoutPage.enterCheckoutInformation(TestDataReader.resolve(firstName), "", "");
     }
 
     @When("user enters checkout information with first name {string}, last name {string}, and postal code {string}")
     public void userEntersCheckoutInformation(String firstName, String lastName, String postalCode) {
         logger.info("Step: User enters checkout information");
-        checkoutPage.enterCheckoutInformation(firstName, lastName, postalCode);
+        checkoutPage.enterCheckoutInformation(
+                TestDataReader.resolve(firstName),
+                TestDataReader.resolve(lastName),
+                TestDataReader.resolve(postalCode));
     }
 
     @When("user clicks continue button")
@@ -58,7 +62,10 @@ public class CheckoutSteps {
     @When("user completes the checkout with first name {string}, last name {string}, and postal code {string}")
     public void userCompletesTheCheckout(String firstName, String lastName, String postalCode) {
         logger.info("Step: User completes checkout process");
-        checkoutPage.completeCheckout(firstName, lastName, postalCode);
+        checkoutPage.completeCheckout(
+                TestDataReader.resolve(firstName),
+                TestDataReader.resolve(lastName),
+                TestDataReader.resolve(postalCode));
     }
 
     @Then("order should be confirmed successfully")
@@ -72,7 +79,7 @@ public class CheckoutSteps {
     public void userShouldSeeConfirmationMessage(String expectedMessage) {
         logger.info("Step: Verifying confirmation message");
         String actualMessage = checkoutPage.getConfirmationMessage();
-        Assert.assertEquals(actualMessage, expectedMessage,
+        Assert.assertEquals(actualMessage, TestDataReader.resolve(expectedMessage),
                 "Confirmation message mismatch");
     }
 

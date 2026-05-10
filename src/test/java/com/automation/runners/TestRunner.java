@@ -7,14 +7,13 @@ import org.testng.annotations.DataProvider;
 @CucumberOptions(
         features = "src/test/resources/features",
         glue = {"com.automation.stepdefinitions"},
-        tags = "@Regression",
+        tags = "${cucumber.filter.tags:@Regression}",  // Dynamic, defaults to @Regression
         plugin = {
                 "pretty",
                 "html:test-output/cucumber-reports/cucumber.html",
                 "json:test-output/cucumber-reports/cucumber.json",
                 "junit:test-output/cucumber-reports/cucumber.xml",
-                "io.qameta.allure.cucumber7jvm.AllureCucumber7Jvm",
-                "com.aventstack.extentreports.cucumber.adapter.ExtentCucumberAdapter:"
+                "io.qameta.allure.cucumber7jvm.AllureCucumber7Jvm"
         },
         monochrome = true,
         dryRun = false,
