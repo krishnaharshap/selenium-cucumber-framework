@@ -13,8 +13,7 @@ import org.testng.annotations.DataProvider;
                 "html:test-output/cucumber-reports/cucumber.html",
                 "json:test-output/cucumber-reports/cucumber.json",
                 "junit:test-output/cucumber-reports/cucumber.xml",
-                "io.qameta.allure.cucumber7jvm.AllureCucumber7Jvm",
-                "com.aventstack.extentreports.cucumber.adapter.ExtentCucumberAdapter:"
+                "io.qameta.allure.cucumber7jvm.AllureCucumber7Jvm"
         },
         monochrome = true,
         dryRun = false,
