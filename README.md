@@ -1,12 +1,10 @@
 # E2E Test Automation Framework
 
-[![Build Status](https://img.shields.io/badge/build-passing-brightgreen)]()
-[![Coverage](https://img.shields.io/badge/coverage-85%25-green)]()
+[![CI - Maven Smoke Tests](https://github.com/krishnaharshap/selenium-cucumber-framework/actions/workflows/ci.yml/badge.svg?branch=develop)](https://github.com/krishnaharshap/selenium-cucumber-framework/actions/workflows/ci.yml)
 [![License](https://img.shields.io/badge/license-MIT-blue.svg)]()
 [![Java](https://img.shields.io/badge/Java-11-orange)]()
 [![Selenium](https://img.shields.io/badge/Selenium-4.15.0-green)]()
 [![Cucumber](https://img.shields.io/badge/Cucumber-7.14.0-brightgreen)]()
-<!---[![CI](https://github.com/krishnaharshap/selenium-cucumber-framework/actions/workflows/ci.yml/badge.svg)](https://github.com/krishnaharshap/selenium-cucumber-framework/actions)--->
 
 **Enterprise-grade test automation framework implementing Page Object Model (POM) design pattern with Behavior-Driven Development (BDD) using Cucumber, Selenium WebDriver, and TestNG. Features dual reporting mechanisms (Allure & Extent), Jenkins CI/CD integration, and cross-browser testing capabilities.**
 
@@ -43,12 +41,10 @@ Develop a robust, scalable, and maintainable end-to-end test automation solution
 [https://www.saucedemo.com](https://www.saucedemo.com)
 
 ### Project Metrics
-- **Execution Time:** 18 minutes (Full Regression Suite)
-- **Test Scenarios:** 14+ automated scenarios
-- **Pass Rate:** 94% (Consistent over 3 months)
-- **Flakiness Rate:** 2% (Reduced from 12%)
-- **Time Savings:** 95% reduction in regression testing time
-- **Defect Reduction:** 45% decrease in production defects
+- **Build Health:** Reported by the GitHub Actions CI badge above
+- **CI Scope:** Chrome headless smoke suite on push and pull request
+- **Test Scenarios:** 14+ UI scenarios across login, product, and checkout flows
+- **Reports:** Surefire, Cucumber, screenshots, and Allure results uploaded as workflow artifacts
 
 ---
 
@@ -500,6 +496,18 @@ mvn allure:report
 
 ## CI/CD Integration
 
+### GitHub Actions
+
+**File:** `.github/workflows/ci.yml`
+
+The primary CI workflow runs a Chrome headless smoke suite on pushes to long-lived and review branches, and on pull requests into `develop` or `main`.
+
+```bash
+mvn -B -ntp test -Dbrowser=chrome -Dheadless=true "-Dcucumber.filter.tags=@Smoke"
+```
+
+Workflow artifacts include Surefire reports, Cucumber reports, screenshots, and Allure results when available.
+
 ### Jenkins Pipeline
 
 **File:** `Jenkinsfile`
@@ -590,10 +598,10 @@ triggers {
 | Metric | Value |
 |--------|-------|
 | **Total Scenarios** | 14+ |
-| **Functional Coverage** | 85% |
-| **Critical Path Coverage** | 100% |
-| **Pass Rate** | 94% |
-| **Automated vs Manual** | 70:30 |
+| **Functional Coverage** | Track through CI artifacts and test inventory |
+| **Critical Path Coverage** | Login, cart, and checkout smoke paths |
+| **Pass Rate** | Reported by GitHub Actions and Jenkins runs |
+| **Automated vs Manual** | Review per release scope |
 
 ---
 
@@ -855,6 +863,6 @@ GitHub: [github.com/krishnaharshap](https://github.com/krishnaharshap)
 
 ---
 
-**Last Updated:** October 2024  
+**Last Updated:** May 2026  
 **Version:** 1.0.0  
-**Status:** Production Ready
+**Status:** Active
