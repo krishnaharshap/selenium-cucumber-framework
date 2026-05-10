@@ -26,6 +26,11 @@ public class ConfigReader {
     }
 
     public static String getProperty(String key) {
+        String systemValue = System.getProperty(key);
+        if (systemValue != null && !systemValue.isBlank()) {
+            return systemValue.trim();
+        }
+
         String value = properties.getProperty(key);
         if (value != null) {
             return value.trim();
