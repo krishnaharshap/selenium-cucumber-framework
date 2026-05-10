@@ -3,6 +3,7 @@ package com.automation.stepdefinitions;
 import com.automation.pages.LoginPage;
 import com.automation.pages.ProductsPage;
 import com.automation.utils.DriverManager;
+import com.automation.utils.TestDataReader;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
@@ -28,14 +29,15 @@ public class LoginSteps {
 
     @When("user enters username {string}")
     public void userEntersUsername(String username) {
-        logger.info("Step: User enters username: {}", username);
-        loginPage.enterUsername(username);
+        String resolvedUsername = TestDataReader.resolve(username);
+        logger.info("Step: User enters username: {}", resolvedUsername);
+        loginPage.enterUsername(resolvedUsername);
     }
 
     @When("user enters password {string}")
     public void userEntersPassword(String password) {
         logger.info("Step: User enters password");
-        loginPage.enterPassword(password);
+        loginPage.enterPassword(TestDataReader.resolve(password));
     }
 
     @When("user clicks on login button")
@@ -46,8 +48,9 @@ public class LoginSteps {
 
     @When("user logs in with username {string} and password {string}")
     public void userLogsInWithUsernameAndPassword(String username, String password) {
-        logger.info("Step: User logs in with username: {} and password", username);
-        productsPage = loginPage.login(username, password);
+        String resolvedUsername = TestDataReader.resolve(username);
+        logger.info("Step: User logs in with username: {} and password", resolvedUsername);
+        productsPage = loginPage.login(resolvedUsername, TestDataReader.resolve(password));
     }
 
     @Then("user should be redirected to products page")
@@ -63,15 +66,16 @@ public class LoginSteps {
         Assert.assertTrue(loginPage.isErrorMessageDisplayed(),
                 "Error message is not displayed");
         String actualError = loginPage.getErrorMessage();
-        Assert.assertTrue(actualError.contains(expectedError),
-                "Expected error: " + expectedError + " but got: " + actualError);
+        String resolvedError = TestDataReader.resolve(expectedError);
+        Assert.assertTrue(actualError.contains(resolvedError),
+                "Expected error: " + resolvedError + " but got: " + actualError);
     }
 
     @Then("products page title should be {string}")
     public void productsPageTitleShouldBe(String expectedTitle) {
         logger.info("Step: Verifying products page title");
         String actualTitle = productsPage.getPageTitleText();
-        Assert.assertEquals(actualTitle, expectedTitle,
+        Assert.assertEquals(actualTitle, TestDataReader.resolve(expectedTitle),
                 "Page title mismatch");
     }
 }

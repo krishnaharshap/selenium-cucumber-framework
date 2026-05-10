@@ -9,32 +9,32 @@ Feature: User Login Functionality
 
   @Smoke @Positive
   Scenario: Successful login with valid credentials
-    When user logs in with username "standard_user" and password "secret_sauce"
+    When user logs in with username "users.standard.username" and password "users.valid.password"
     Then user should be redirected to products page
-    And products page title should be "Products"
+    And products page title should be "pages.products.title"
 
   @Positive
   Scenario: Successful login using step by step approach
-    When user enters username "standard_user"
-    And user enters password "secret_sauce"
+    When user enters username "users.standard.username"
+    And user enters password "users.valid.password"
     And user clicks on login button
     Then user should be redirected to products page
     And user should see 6 products on the page
 
   @Negative
   Scenario: Login with invalid username
-    When user logs in with username "invalid_user" and password "secret_sauce"
-    Then user should see error message "Epic sadface: Username and password do not match any user in this service"
+    When user logs in with username "users.invalid.username" and password "users.valid.password"
+    Then user should see error message "messages.login.invalid"
 
   @Negative
   Scenario: Login with invalid password
-    When user logs in with username "standard_user" and password "invalid_password"
-    Then user should see error message "Epic sadface: Username and password do not match any user in this service"
+    When user logs in with username "users.standard.username" and password "users.invalid.password"
+    Then user should see error message "messages.login.invalid"
 
   @Negative
   Scenario: Login with locked out user
-    When user logs in with username "locked_out_user" and password "secret_sauce"
-    Then user should see error message "Epic sadface: Sorry, this user has been locked out"
+    When user logs in with username "users.locked.username" and password "users.valid.password"
+    Then user should see error message "messages.login.locked"
 
   @Negative
   Scenario Outline: Login with multiple invalid credentials
@@ -42,7 +42,7 @@ Feature: User Login Functionality
     Then user should see error message "<error_message>"
 
     Examples:
-      | username        | password      | error_message                                                             |
-      | invalid_user    | secret_sauce  | Epic sadface: Username and password do not match any user in this service |
-      | standard_user   | wrong_pwd     | Epic sadface: Username and password do not match any user in this service |
-      | locked_out_user | secret_sauce  | Epic sadface: Sorry, this user has been locked out                        |
+      | username                | password               | error_message          |
+      | users.invalid.username  | users.valid.password   | messages.login.invalid |
+      | users.standard.username | users.invalid.password | messages.login.invalid |
+      | users.locked.username   | users.valid.password   | messages.login.locked  |
