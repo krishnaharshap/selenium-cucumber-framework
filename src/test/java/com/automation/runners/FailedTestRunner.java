@@ -12,7 +12,6 @@ import org.testng.annotations.DataProvider;
                 "html:test-output/cucumber-reports/failed-cucumber.html",
                 "json:test-output/cucumber-reports/failed-cucumber.json",
                 "io.qameta.allure.cucumber7jvm.AllureCucumber7Jvm",
-                "com.aventstack.extentreports.cucumber.adapter.ExtentCucumberAdapter:",
                 "rerun:test-output/cucumber-reports/rerun.txt"
         },
         monochrome = true

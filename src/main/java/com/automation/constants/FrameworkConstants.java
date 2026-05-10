@@ -7,10 +7,9 @@ public final class FrameworkConstants {
     private static final String PROJECT_PATH = System.getProperty("user.dir");
 
     public static final String CONFIG_FILE_PATH = PROJECT_PATH + "/src/main/resources/config/config.properties";
-    public static final String TEST_DATA_PATH = PROJECT_PATH + "/src/main/resources/testdata/testdata.xlsx";
+    public static final String TEST_DATA_PATH = PROJECT_PATH + "/src/test/resources/testdata/saucedemo-test-data.properties";
     public static final String FEATURE_FILES_PATH = PROJECT_PATH + "/src/test/resources/features";
 
-    public static final String EXTENT_REPORT_PATH = PROJECT_PATH + "/test-output/extent-reports/";
     public static final String ALLURE_RESULTS_PATH = PROJECT_PATH + "/test-output/allure-results/";
     public static final String SCREENSHOT_PATH = PROJECT_PATH + "/test-output/screenshots/";
 

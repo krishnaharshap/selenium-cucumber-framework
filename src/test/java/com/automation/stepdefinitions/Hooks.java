@@ -26,6 +26,11 @@ public class Hooks {
         logger.info("Starting Scenario: {}", scenario.getName());
         logger.info("========================================");
 
+        if (isApiScenario(scenario)) {
+            logger.info("Skipping WebDriver setup for API scenario: {}", scenario.getName());
+            return;
+        }
+
         driver = DriverManager.getDriver();
 
         // Add explicit page load timeout
@@ -41,6 +46,11 @@ public class Hooks {
 
     @After
     public void tearDown(Scenario scenario) {
+        if (isApiScenario(scenario)) {
+            logger.info("Skipping WebDriver teardown for API scenario: {}", scenario.getName());
+            return;
+        }
+
         try {
             if (scenario.isFailed()) {
                 logger.error("Scenario FAILED: {}", scenario.getName());
@@ -60,5 +70,9 @@ public class Hooks {
                 logger.error("Error quitting driver: {}", e.getMessage());
             }
         }
+    }
+
+    private boolean isApiScenario(Scenario scenario) {
+        return scenario.getSourceTagNames().contains("@API");
     }
 }
