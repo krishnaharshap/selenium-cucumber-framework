@@ -3,6 +3,7 @@ package com.automation.stepdefinitions;
 import com.automation.utils.ConfigReader;
 import com.automation.utils.DriverManager;
 import com.automation.utils.ScreenshotUtil;
+import com.automation.utils.WaitHelper;
 import io.cucumber.java.After;
 import io.cucumber.java.Before;
 import io.cucumber.java.Scenario;
@@ -35,8 +36,8 @@ public class Hooks {
         logger.info("Navigated to URL: {}", ConfigReader.getUrl());
 
         // Wait for page load without hard-coded sleep
-        waitHelper.waitForPageLoad();
-        }
+        new WaitHelper(driver).waitForPageLoad();
+    }
 
     @After
     public void tearDown(Scenario scenario) {
