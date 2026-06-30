@@ -20,7 +20,7 @@ public class DriverManager {
 
     private DriverManager() {}
 
-    public static synchronized WebDriver getDriver() {
+    public static WebDriver getDriver() {
         if (driver.get() == null) {
             logger.debug("WebDriver not initialized, initializing now");
             initializeDriver();

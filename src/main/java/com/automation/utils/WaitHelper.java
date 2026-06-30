@@ -48,11 +48,7 @@ public class WaitHelper {
         return wait.until(ExpectedConditions.textToBePresentInElementLocated(locator, text));
     }
 
-    public void waitForSeconds(int seconds) {
-        try {
-            Thread.sleep(seconds * 1000L);
-        } catch (InterruptedException e) {
-            Thread.currentThread().interrupt();
-        }
+    public void waitForUrlContains(String urlFragment) {
+        wait.until(ExpectedConditions.urlContains(urlFragment));
     }
 }

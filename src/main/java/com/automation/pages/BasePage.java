@@ -1,5 +1,6 @@
 package com.automation.pages;
 
+import com.automation.utils.ConfigReader;
 import com.automation.utils.WaitHelper;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -23,7 +24,7 @@ public class BasePage {
     public BasePage(WebDriver driver) {
         this.driver = driver;
         this.waitHelper = new WaitHelper(driver);
-        this.wait = new WebDriverWait(driver, Duration.ofSeconds(20));
+        this.wait = new WebDriverWait(driver, Duration.ofSeconds(ConfigReader.getExplicitWait()));
         PageFactory.initElements(driver, this);
     }
 
