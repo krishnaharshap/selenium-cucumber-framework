@@ -1,0 +1,66 @@
+name: Publish Allure Report → GitHub Pages
+
+# Triggered after the main CI smoke tests complete, or manually.
+# Free GitHub Pages hosting — report URL: https://krishnaharshap.github.io/selenium-cucumber-framework/
+on:
+  workflow_run:
+    workflows: ["CI - Maven Smoke Tests"]
+    branches: [main, develop]
+    types: [completed]
+  workflow_dispatch:
+
+permissions:
+  contents: write    # needed to push to gh-pages branch
+  pages: write
+  id-token: write
+
+jobs:
+  allure-report:
+    name: Generate & Deploy Allure Report
+    runs-on: ubuntu-latest
+    # Run even when CI failed so we can see failure details in the report
+    if: ${{ github.event_name == 'workflow_dispatch' || github.event.workflow_run.conclusion != 'cancelled' }}
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Java 17
+        uses: actions/setup-java@v4
+        with:
+          java-version: '17'
+          distribution: temurin
+          cache: maven
+
+      - name: Run smoke tests (results only)
+        run: >
+          mvn -B -ntp test
+          -Dbrowser=chrome
+          -Dheadless=true
+          "-Dcucumber.filter.tags=@Smoke"
+        continue-on-error: true   # publish report regardless of test outcome
+
+      - name: Fetch existing Allure history from gh-pages
+        uses: actions/checkout@v4
+        continue-on-error: true
+        with:
+          ref: gh-pages
+          path: gh-pages
+
+      - name: Generate Allure Report with history
+        uses: simple-elf/allure-report-action@v1.7
+        if: always()
+        with:
+          allure_results: target/allure-results
+          allure_history: allure-history
+          gh_pages: gh-pages
+          keep_reports: 20
+
+      - name: Deploy to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v4
+        if: always()
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_branch: gh-pages
+          publish_dir: allure-history
+          commit_message: "chore: update Allure report [skip ci]"
