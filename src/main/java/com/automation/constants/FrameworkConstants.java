@@ -6,8 +6,14 @@ public final class FrameworkConstants {
 
     private static final String PROJECT_PATH = System.getProperty("user.dir");
 
+    /** Active environment: set via -Denv=staging or Maven profile */
+    public static final String ENVIRONMENT = System.getProperty("env", "qa");
+
     public static final String CONFIG_FILE_PATH = PROJECT_PATH + "/src/main/resources/config/config.properties";
-    public static final String TEST_DATA_PATH = PROJECT_PATH + "/src/test/resources/testdata/saucedemo-test-data.properties";
+    public static final String ENV_CONFIG_FILE_PATH =
+            PROJECT_PATH + "/src/main/resources/config/environments/" + ENVIRONMENT + ".properties";
+    public static final String TEST_DATA_PATH =
+            PROJECT_PATH + "/src/test/resources/testdata/" + ENVIRONMENT + "-test-data.properties";
     public static final String FEATURE_FILES_PATH = PROJECT_PATH + "/src/test/resources/features";
 
     public static final String ALLURE_RESULTS_PATH = PROJECT_PATH + "/test-output/allure-results/";

@@ -4,7 +4,6 @@ import io.qameta.allure.Step;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 
@@ -100,6 +99,19 @@ public class ProductsPage extends BasePage {
             logger.info("Cart is empty");
             return "0";
         }
+    }
+
+    /**
+     * Generic product add — derives the button ID from the product display name.
+     * "Sauce Labs Backpack" → id="add-to-cart-sauce-labs-backpack"
+     * Adapt the ID pattern for a different AUT by overriding this method.
+     */
+    @Step("Add product to cart: {productName}")
+    public ProductsPage addProductToCart(String productName) {
+        String buttonId = "add-to-cart-" + productName.toLowerCase().replace(" ", "-");
+        logger.info("Adding product '{}' to cart (id={})", productName, buttonId);
+        click(By.id(buttonId));
+        return this;
     }
 
     @Step("Click shopping cart icon")
