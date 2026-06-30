@@ -20,7 +20,7 @@ public class DriverManager {
 
     private DriverManager() {}
 
-    public static synchronized WebDriver getDriver() {
+    public static WebDriver getDriver() {
         if (driver.get() == null) {
             logger.debug("WebDriver not initialized, initializing now");
             initializeDriver();
@@ -36,40 +36,27 @@ public class DriverManager {
 
     private static void initializeDriver() {
         String browser = ConfigReader.getBrowser();
-        logger.info("Initializing {} driver", browser);
+        boolean headless = ConfigReader.isHeadless();
+        logger.info("Initializing {} driver (headless={})", browser, headless);
 
         WebDriver webDriver;
         switch (browser.toLowerCase()) {
             case "chrome":
                 WebDriverManager.chromedriver().setup();
-                ChromeOptions chromeOptions = new ChromeOptions();
-                chromeOptions.addArguments("--start-maximized");
-                chromeOptions.addArguments("--disable-notifications");
-                chromeOptions.addArguments("--disable-popup-blocking");
-                if (ConfigReader.isHeadless()) {
-                    chromeOptions.addArguments("--headless=new");
-                }
-                webDriver = new ChromeDriver(chromeOptions);
+                webDriver = new ChromeDriver(buildChromeOptions(headless));
                 break;
 
             case "firefox":
                 WebDriverManager.firefoxdriver().setup();
-                FirefoxOptions firefoxOptions = new FirefoxOptions();
-                if (ConfigReader.isHeadless()) {
-                    firefoxOptions.addArguments("--headless");
+                webDriver = new FirefoxDriver(buildFirefoxOptions(headless));
+                if (!headless) {
+                    webDriver.manage().window().maximize();
                 }
-                webDriver = new FirefoxDriver(firefoxOptions);
-                webDriver.manage().window().maximize();
                 break;
 
             case "edge":
                 WebDriverManager.edgedriver().setup();
-                EdgeOptions edgeOptions = new EdgeOptions();
-                edgeOptions.addArguments("--start-maximized");
-                if (ConfigReader.isHeadless()) {
-                    edgeOptions.addArguments("--headless");
-                }
-                webDriver = new EdgeDriver(edgeOptions);
+                webDriver = new EdgeDriver(buildEdgeOptions(headless));
                 break;
 
             default:
@@ -80,7 +67,49 @@ public class DriverManager {
         webDriver.manage().timeouts().implicitlyWait(Duration.ofSeconds(ConfigReader.getImplicitWait()));
         webDriver.manage().timeouts().pageLoadTimeout(Duration.ofSeconds(30));
         driver.set(webDriver);
-        logger.info("Driver initialized successfully");
+        logger.info("{} driver initialized successfully", browser);
+    }
+
+    private static ChromeOptions buildChromeOptions(boolean headless) {
+        ChromeOptions options = new ChromeOptions();
+        // Required for Linux / Docker / CI environments
+        options.addArguments("--no-sandbox");
+        options.addArguments("--disable-dev-shm-usage");
+        options.addArguments("--disable-gpu");
+        options.addArguments("--disable-notifications");
+        options.addArguments("--disable-popup-blocking");
+        if (headless) {
+            options.addArguments("--headless=new");
+            options.addArguments("--window-size=1920,1080");
+        } else {
+            options.addArguments("--start-maximized");
+        }
+        return options;
+    }
+
+    private static FirefoxOptions buildFirefoxOptions(boolean headless) {
+        FirefoxOptions options = new FirefoxOptions();
+        if (headless) {
+            options.addArguments("-headless");
+            options.addArguments("--width=1920");
+            options.addArguments("--height=1080");
+        }
+        return options;
+    }
+
+    private static EdgeOptions buildEdgeOptions(boolean headless) {
+        EdgeOptions options = new EdgeOptions();
+        // Required for Linux / Docker / CI environments
+        options.addArguments("--no-sandbox");
+        options.addArguments("--disable-dev-shm-usage");
+        options.addArguments("--disable-gpu");
+        if (headless) {
+            options.addArguments("--headless=new");
+            options.addArguments("--window-size=1920,1080");
+        } else {
+            options.addArguments("--start-maximized");
+        }
+        return options;
     }
 
     public static void quitDriver() {

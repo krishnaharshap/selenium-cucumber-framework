@@ -7,12 +7,13 @@ import org.testng.annotations.DataProvider;
 @CucumberOptions(
         features = "src/test/resources/features",
         glue = {"com.automation.stepdefinitions"},
-        tags = "${cucumber.filter.tags:@Regression}",  // Dynamic, defaults to @Regression
+        // Default tag set in cucumber.properties; override via -Dcucumber.filter.tags=@Smoke
         plugin = {
                 "pretty",
                 "html:test-output/cucumber-reports/cucumber.html",
                 "json:test-output/cucumber-reports/cucumber.json",
                 "junit:test-output/cucumber-reports/cucumber.xml",
+                "rerun:test-output/cucumber-reports/rerun.txt",
                 "io.qameta.allure.cucumber7jvm.AllureCucumber7Jvm"
         },
         monochrome = true,
