@@ -42,6 +42,7 @@ public class ProductsPage extends BasePage {
     @Step("Verify products page is displayed")
     public boolean isProductsPageDisplayed() {
         logger.info("Verifying products page is displayed");
+        wait.until(ExpectedConditions.visibilityOf(pageTitle));
         return pageTitle.isDisplayed() && getText(pageTitle).equals("Products");
     }
 

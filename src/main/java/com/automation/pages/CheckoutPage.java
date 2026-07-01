@@ -53,6 +53,7 @@ public class CheckoutPage extends BasePage {
     @Step("Verify cart page is displayed")
     public boolean isCartPageDisplayed() {
         logger.info("Verifying cart page is displayed");
+        wait.until(ExpectedConditions.visibilityOf(pageTitle));
         return pageTitle.isDisplayed() && getText(pageTitle).equals("Your Cart");
     }
 
