@@ -67,7 +67,8 @@ public class CheckoutPage extends BasePage {
     @Step("Click checkout button")
     public CheckoutPage clickCheckout() {
         logger.info("Clicking checkout button");
-        click(checkoutButton);
+        wait.until(ExpectedConditions.elementToBeClickable(checkoutButton));
+        jsClick(checkoutButton);
         wait.until(ExpectedConditions.urlContains("/checkout-step-one.html"));
         return this;
     }
