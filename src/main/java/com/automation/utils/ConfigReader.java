@@ -11,18 +11,37 @@ import java.util.Properties;
 public class ConfigReader {
 
     private static final Logger logger = LogManager.getLogger(ConfigReader.class);
-    private static Properties properties;
+    private static final Properties properties = loadConfig();
 
-    static {
+    /**
+     * Loads base config.properties then overlays the active environment file on top,
+     * so environment-specific values always win over base defaults.
+     */
+    private static Properties loadConfig() {
+        Properties props = new Properties();
+
+        // 1. Load base defaults
         try (FileInputStream fis = new FileInputStream(FrameworkConstants.CONFIG_FILE_PATH)) {
-            // Using try-with-resources for automatic cleanup
-            properties = new Properties();
-            properties.load(fis);
-            logger.info("Configuration properties loaded successfully");
+            props.load(fis);
+            logger.info("Base config loaded from {}", FrameworkConstants.CONFIG_FILE_PATH);
         } catch (IOException e) {
-            logger.error("Failed to load configuration file: " + e.getMessage());
-            throw new RuntimeException("Configuration file not found at: " + FrameworkConstants.CONFIG_FILE_PATH);
+            throw new RuntimeException("Base config not found: " + FrameworkConstants.CONFIG_FILE_PATH, e);
         }
+
+        // 2. Overlay environment-specific config (e.g. environments/qa.properties)
+        java.io.File envFile = new java.io.File(FrameworkConstants.ENV_CONFIG_FILE_PATH);
+        if (envFile.exists()) {
+            try (FileInputStream fis = new FileInputStream(envFile)) {
+                props.load(fis);
+                logger.info("Environment config '{}' loaded and overlaid", FrameworkConstants.ENVIRONMENT);
+            } catch (IOException e) {
+                logger.warn("Could not load env config {}: {}", FrameworkConstants.ENV_CONFIG_FILE_PATH, e.getMessage());
+            }
+        } else {
+            logger.warn("No environment config found for '{}', using base config only", FrameworkConstants.ENVIRONMENT);
+        }
+
+        return props;
     }
 
     public static String getProperty(String key) {

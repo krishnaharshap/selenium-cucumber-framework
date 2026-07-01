@@ -101,6 +101,19 @@ public class ProductsPage extends BasePage {
         }
     }
 
+    /**
+     * Generic product add — derives the button ID from the product display name.
+     * "Sauce Labs Backpack" → id="add-to-cart-sauce-labs-backpack"
+     * Adapt the ID pattern for a different AUT by overriding this method.
+     */
+    @Step("Add product to cart: {productName}")
+    public ProductsPage addProductToCart(String productName) {
+        String buttonId = "add-to-cart-" + productName.toLowerCase().replace(" ", "-");
+        logger.info("Adding product '{}' to cart (id={})", productName, buttonId);
+        click(By.id(buttonId));
+        return this;
+    }
+
     @Step("Click shopping cart icon")
     public CheckoutPage clickShoppingCart() {
         logger.info("Clicking shopping cart icon");

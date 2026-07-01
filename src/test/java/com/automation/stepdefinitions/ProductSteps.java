@@ -19,16 +19,22 @@ public class ProductSteps {
         this.productsPage = new ProductsPage(DriverManager.getDriver());
     }
 
+    /** Generic step — works for any product name on any e-commerce AUT */
+    @When("user adds {string} to cart")
+    public void userAddsProductToCart(String productName) {
+        logger.info("Step: User adds '{}' to cart", productName);
+        productsPage.addProductToCart(productName);
+    }
+
+    // SauceDemo-specific convenience steps kept for backward compatibility
     @When("user adds Sauce Labs Backpack to cart")
     public void userAddsSauceLabsBackpackToCart() {
-        logger.info("Step: User adds Sauce Labs Backpack to cart");
-        productsPage.addBackpackToCart();
+        userAddsProductToCart("Sauce Labs Backpack");
     }
 
     @When("user adds Sauce Labs Bike Light to cart")
     public void userAddsSauceLabsBikeLightToCart() {
-        logger.info("Step: User adds Sauce Labs Bike Light to cart");
-        productsPage.addBikeLightToCart();
+        userAddsProductToCart("Sauce Labs Bike Light");
     }
 
     @When("user removes Sauce Labs Backpack from cart")
