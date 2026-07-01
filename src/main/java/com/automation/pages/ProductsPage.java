@@ -86,7 +86,9 @@ public class ProductsPage extends BasePage {
     @Step("Remove Sauce Labs Backpack from cart")
     public ProductsPage removeBackpackFromCart() {
         logger.info("Removing Sauce Labs Backpack from cart");
-        click(removeBackpackButton);
+        wait.until(ExpectedConditions.elementToBeClickable(removeBackpackButton));
+        jsClick(removeBackpackButton);
+        wait.until(ExpectedConditions.invisibilityOfElementLocated(By.className("shopping_cart_badge")));
         return this;
     }
 
