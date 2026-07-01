@@ -4,6 +4,7 @@ import io.qameta.allure.Step;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 
 import java.util.List;
 
@@ -57,6 +58,7 @@ public class CheckoutPage extends BasePage {
 
     @Step("Get cart items count")
     public int getCartItemsCount() {
+        wait.until(ExpectedConditions.visibilityOf(pageTitle));
         int count = cartItems.size();
         logger.info("Cart items count: {}", count);
         return count;

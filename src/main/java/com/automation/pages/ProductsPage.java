@@ -118,12 +118,14 @@ public class ProductsPage extends BasePage {
     public CheckoutPage clickShoppingCart() {
         logger.info("Clicking shopping cart icon");
         click(shoppingCartIcon);
+        wait.until(ExpectedConditions.urlContains("/cart.html"));
         return new CheckoutPage(driver);
     }
 
     @Step("Verify item is added to cart")
     public boolean isItemAddedToCart() {
         try {
+            wait.until(ExpectedConditions.visibilityOf(cartBadge));
             return cartBadge.isDisplayed();
         } catch (Exception e) {
             return false;
