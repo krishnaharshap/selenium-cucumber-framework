@@ -42,6 +42,7 @@ public class ProductsPage extends BasePage {
     @Step("Verify products page is displayed")
     public boolean isProductsPageDisplayed() {
         logger.info("Verifying products page is displayed");
+        wait.until(ExpectedConditions.visibilityOf(pageTitle));
         return pageTitle.isDisplayed() && getText(pageTitle).equals("Products");
     }
 
@@ -85,7 +86,9 @@ public class ProductsPage extends BasePage {
     @Step("Remove Sauce Labs Backpack from cart")
     public ProductsPage removeBackpackFromCart() {
         logger.info("Removing Sauce Labs Backpack from cart");
-        click(removeBackpackButton);
+        wait.until(ExpectedConditions.elementToBeClickable(removeBackpackButton));
+        jsClick(removeBackpackButton);
+        wait.until(ExpectedConditions.invisibilityOfElementLocated(By.className("shopping_cart_badge")));
         return this;
     }
 

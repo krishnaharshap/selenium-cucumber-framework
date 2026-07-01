@@ -53,6 +53,7 @@ public class CheckoutPage extends BasePage {
     @Step("Verify cart page is displayed")
     public boolean isCartPageDisplayed() {
         logger.info("Verifying cart page is displayed");
+        wait.until(ExpectedConditions.visibilityOf(pageTitle));
         return pageTitle.isDisplayed() && getText(pageTitle).equals("Your Cart");
     }
 
@@ -70,6 +71,7 @@ public class CheckoutPage extends BasePage {
         wait.until(ExpectedConditions.elementToBeClickable(checkoutButton));
         jsClick(checkoutButton);
         wait.until(ExpectedConditions.urlContains("/checkout-step-one.html"));
+        wait.until(ExpectedConditions.visibilityOf(firstNameField));
         return this;
     }
 
@@ -84,11 +86,11 @@ public class CheckoutPage extends BasePage {
         if (postalCode == null || postalCode.trim().isEmpty()) {
             throw new IllegalArgumentException("Postal code cannot be empty");
         }
-        
+
         logger.info("Entering checkout information: {} {}", firstName, lastName);
-        sendKeys(firstNameField, firstName);
-        sendKeys(lastNameField, lastName);
-        sendKeys(postalCodeField, postalCode);
+        jsSendKeys(firstNameField, firstName);
+        jsSendKeys(lastNameField, lastName);
+        jsSendKeys(postalCodeField, postalCode);
         return this;
     }
 

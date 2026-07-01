@@ -100,6 +100,27 @@ public class BasePage {
         logger.info("JavaScript click performed");
     }
 
+    /**
+     * Sets a field's value via the native property setter and dispatches input/change
+     * events, instead of WebDriver's sendKeys. Some React-controlled inputs (e.g.
+     * SauceDemo's checkout form) don't register keystrokes sent through WebDriver's
+     * native key-event dispatch in headless Chrome, silently dropping them; the value
+     * setter bypasses that and updates React's internal state directly.
+     */
+    protected void jsSendKeys(WebElement element, String text) {
+        wait.until(ExpectedConditions.visibilityOf(element));
+        JavascriptExecutor js = (JavascriptExecutor) driver;
+        String script =
+                "const el = arguments[0], val = arguments[1];" +
+                "const proto = Object.getPrototypeOf(el);" +
+                "const setter = Object.getOwnPropertyDescriptor(proto, 'value').set;" +
+                "setter.call(el, val);" +
+                "el.dispatchEvent(new Event('input', { bubbles: true }));" +
+                "el.dispatchEvent(new Event('change', { bubbles: true }));";
+        js.executeScript(script, element, text);
+        logger.info("Entered text via JS setter: {}", text);
+    }
+
     public String getPageTitle() {
         String title = driver.getTitle();
         logger.info("Page title: {}", title);

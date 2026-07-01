@@ -60,8 +60,12 @@ public class LoginPage extends BasePage {
     @Step("Click login button")
     public ProductsPage clickLoginButton() {
         logger.info("Clicking login button");
-        waitHelper.waitForElementClickable(loginButton);
-        click(loginButton);
+        wait.until(ExpectedConditions.elementToBeClickable(loginButton));
+        jsClick(loginButton);
+        // Login can fail intentionally (invalid credentials, locked-out user), leaving
+        // the browser on the login page, so we can't assert a URL change here. Callers
+        // verify the outcome themselves via isProductsPageDisplayed() or
+        // isErrorMessageDisplayed(), both of which wait on their own.
         return new ProductsPage(driver);
     }
 
@@ -83,6 +87,7 @@ public class LoginPage extends BasePage {
     @Step("Verify error message is displayed")
     public boolean isErrorMessageDisplayed() {
         try {
+            wait.until(ExpectedConditions.visibilityOf(errorMessage));
             return errorMessage.isDisplayed();
         } catch (Exception e) {
             return false;
