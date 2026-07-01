@@ -7,6 +7,7 @@ on:
       - main
       - "feature/**"
       - "feat/**"
+      - "fix/**"
       - "test/**"
       - "chore/**"
       - "docs/**"
