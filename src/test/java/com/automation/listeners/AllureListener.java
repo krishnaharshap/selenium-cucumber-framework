@@ -1,13 +1,9 @@
 package com.automation.listeners;
 
 import io.qameta.allure.Attachment;
-import org.openqa.selenium.OutputType;
-import org.openqa.selenium.TakesScreenshot;
-import org.openqa.selenium.WebDriver;
 import org.testng.ITestContext;
 import org.testng.ITestListener;
 import org.testng.ITestResult;
-import com.automation.utils.DriverManager;
 
 public class AllureListener implements ITestListener {
 
@@ -23,15 +19,7 @@ public class AllureListener implements ITestListener {
 
     @Override
     public void onTestFailure(ITestResult result) {
-        System.out.println("Test failed: " + result.getName());
-
-        if (DriverManager.hasDriver()) {
-            WebDriver driver = DriverManager.getDriver();
-            if (driver != null) {
-                saveScreenshot(driver);
-            }
-        }
-
+        // Screenshot is captured by Cucumber @After hook to avoid duplicates in Allure
         saveTextLog(getTestMethodName(result) + " failed with exception: " + result.getThrowable());
     }
 
@@ -48,11 +36,6 @@ public class AllureListener implements ITestListener {
     @Override
     public void onFinish(ITestContext context) {
         System.out.println("Test Suite finished: " + context.getName());
-    }
-
-    @Attachment(value = "Screenshot", type = "image/png")
-    public byte[] saveScreenshot(WebDriver driver) {
-        return ((TakesScreenshot) driver).getScreenshotAs(OutputType.BYTES);
     }
 
     @Attachment(value = "{0}", type = "text/plain")

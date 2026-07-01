@@ -5,9 +5,6 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
-
-import java.time.Duration;
 
 public class LoginPage extends BasePage {
 
@@ -35,8 +32,6 @@ public class LoginPage extends BasePage {
     public boolean isLoginPageDisplayed() {
         logger.info("Verifying login page is displayed");
         try {
-            // Wait for logo to be visible
-            WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(15));
             wait.until(ExpectedConditions.visibilityOf(appLogo));
             wait.until(ExpectedConditions.visibilityOf(loginButton));
             return appLogo.isDisplayed() && loginButton.isDisplayed();
