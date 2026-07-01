@@ -22,13 +22,6 @@ public class ProductSteps {
         ctx.getProductsPage().addProductToCart(productName);
     }
 
-    /** Generic step — works for any product name on any e-commerce AUT */
-    @When("user adds {string} to cart")
-    public void userAddsProductToCart(String productName) {
-        logger.info("Step: User adds '{}' to cart", productName);
-        productsPage.addProductToCart(productName);
-    }
-
     // SauceDemo-specific convenience steps kept for backward compatibility
     @When("user adds Sauce Labs Backpack to cart")
     public void userAddsSauceLabsBackpackToCart() {
