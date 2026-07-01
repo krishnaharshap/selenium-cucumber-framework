@@ -60,8 +60,9 @@ public class LoginPage extends BasePage {
     @Step("Click login button")
     public ProductsPage clickLoginButton() {
         logger.info("Clicking login button");
-        waitHelper.waitForElementClickable(loginButton);
-        click(loginButton);
+        wait.until(ExpectedConditions.elementToBeClickable(loginButton));
+        jsClick(loginButton);
+        wait.until(ExpectedConditions.urlContains("/inventory.html"));
         return new ProductsPage(driver);
     }
 
