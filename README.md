@@ -1,265 +1,166 @@
-# E2E Test Automation Framework
+# Selenium Cucumber Framework
 
-This repository contains a Selenium, Cucumber, and TestNG based automation framework for the SauceDemo sample application. It supports UI testing, a small API testing slice, configurable browser execution, and report generation for local and CI runs.
+[![CI](https://github.com/krishnaharshap/selenium-cucumber-framework/actions/workflows/ci.yml/badge.svg?branch=main)](https://github.com/krishnaharshap/selenium-cucumber-framework/actions/workflows/ci.yml)
+[![Cross-Browser](https://github.com/krishnaharshap/selenium-cucumber-framework/actions/workflows/cross-browser.yml/badge.svg?branch=main)](https://github.com/krishnaharshap/selenium-cucumber-framework/actions/workflows/cross-browser.yml)
+[![Java](https://img.shields.io/badge/Java-17-orange)](https://www.oracle.com/java/)
+[![Selenium](https://img.shields.io/badge/Selenium-4.43.0-green)](https://www.selenium.dev/)
+[![Cucumber](https://img.shields.io/badge/Cucumber-7.34.3-brightgreen)](https://cucumber.io/)
+[![License](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
 
-## Scope
+End-to-end test automation framework built with Selenium 4, Cucumber 7, and TestNG. Designed as an AUT-agnostic, portfolio-quality framework that demonstrates real-world automation engineering practices: Page Object Model, Picocontainer dependency injection, multi-environment config, cross-browser CI, and automated Allure report publishing on GitHub Pages.
 
-- UI coverage for login, product, cart, and checkout flows.
-- API coverage using RestAssured.
-- Page Object Model structure for maintainable page and step logic.
-- Config-driven execution for browser, URL, waits, and reporting.
-- GitHub Actions and Jenkins support.
-- Failure screenshots and report artifacts.
+**Live Allure Report:** https://krishnaharshap.github.io/selenium-cucumber-framework/
 
-## Current Test Inventory
-
-| Area | Location | Notes |
-| --- | --- | --- |
-| Login UI | `src/test/resources/features/Login.feature` | Valid and negative login coverage |
-| Product UI | `src/test/resources/features/ProductPurchase.feature` | Cart actions and product count checks |
-| Checkout UI | `src/test/resources/features/E2ECheckout.feature` | End-to-end purchase flow |
-| API | `src/test/resources/features/ApiTesting.feature` | Basic GET and POST checks |
-
-The exact scenario counts are kept in the feature files and can change as the suite grows.
+---
 
 ## Stack
-[![CI - Maven Smoke Tests](https://github.com/krishnaharshap/selenium-cucumber-framework/actions/workflows/ci.yml/badge.svg?branch=develop)](https://github.com/krishnaharshap/selenium-cucumber-framework/actions/workflows/ci.yml)
-[![License](https://img.shields.io/badge/license-MIT-blue.svg)]()
-[![Java](https://img.shields.io/badge/Java-11-orange)]()
-[![Selenium](https://img.shields.io/badge/Selenium-4.15.0-green)]()
-[![Cucumber](https://img.shields.io/badge/Cucumber-7.14.0-brightgreen)]()
 
-**Enterprise-grade test automation framework implementing Page Object Model (POM) design pattern with Behavior-Driven Development (BDD) using Cucumber, Selenium WebDriver, and TestNG. Features dual reporting mechanisms (Allure & Extent), Jenkins CI/CD integration, and cross-browser testing capabilities.**
+| Layer | Technology | Version |
+|---|---|---|
+| Language | Java | 17 |
+| Build | Maven | 3.6+ |
+| Browser automation | Selenium WebDriver | 4.43.0 |
+| BDD | Cucumber JVM | 7.34.3 |
+| Test runner | TestNG | 7.12 |
+| Dependency injection | Picocontainer | via cucumber-picocontainer |
+| Driver management | WebDriverManager | 6.3.4 |
+| API testing | RestAssured | 5.5.5 |
+| Reporting | Allure | 2.34.0 |
+| Logging | Log4j2 | 2.x |
+| CI | GitHub Actions + Jenkins | — |
 
-## Table of Contents
-
-- [Project Overview](#project-overview)
-- [Key Features](#key-features)
-- [Technology Stack](#technology-stack)
-- [Project Architecture](#project-architecture)
-- [Prerequisites](#prerequisites)
-- [Installation & Setup](#installation--setup)
-- [Project Structure](#project-structure)
-- [Configuration](#configuration)
-- [Running Tests](#running-tests)
-- [Test Reports](#test-reports)
-- [CI/CD Integration](#cicd-integration)
-- [Test Coverage](#test-coverage)
-- [Best Practices](#best-practices)
-- [Troubleshooting](#troubleshooting)
-- [Contributing](#contributing)
-- [Documentation](#documentation)
-- [License](#license)
-- [Contact](#contact)
+Exact versions are pinned in `pom.xml` properties.
 
 ---
-
-## Project Overview
-
-### Objective
-Develop a robust, scalable, and maintainable end-to-end test automation solution that reduces manual testing effort by 95%, accelerates release cycles, and improves software quality with 85% functional coverage.
-
-### Application Under Test
-**SauceDemo** - E-commerce Web Application  
-[https://www.saucedemo.com](https://www.saucedemo.com)
-
-### Project Metrics
-- **Build Health:** Reported by the GitHub Actions CI badge above
-- **CI Scope:** Chrome headless smoke suite on push and pull request
-- **Test Scenarios:** 14+ UI scenarios across login, product, and checkout flows
-- **Reports:** Surefire, Cucumber, screenshots, and Allure results uploaded as workflow artifacts
-
----
-
-## Key Features
-
-### Core Capabilities
-- ✅ **Page Object Model (POM)** - Industry-standard design pattern for maintainability
-- ✅ **Behavior-Driven Development (BDD)** - Cucumber with Gherkin syntax for business readability
-- ✅ **Dual Reporting** - Allure Reports (technical) + Extent Reports (executive)
-- ✅ **Cross-Browser Testing** - Chrome, Firefox, Edge with headless mode support
-- ✅ **Parallel Execution** - ThreadSafe WebDriver management for concurrent test runs
-- ✅ **CI/CD Ready** - Complete Jenkins pipeline integration with parameterized builds
-- ✅ **Smart Waits** - Explicit wait strategies eliminating test flakiness
-- ✅ **Screenshot Capture** - Automatic screenshot on failure with report integration
-- ✅ **Comprehensive Logging** - Log4j2 with console and file appenders
-- ✅ **Data-Driven Testing** - Externalized test data and configuration management
-- ✅ **Rerun Failed Tests** - Automatic failed scenario retry mechanism
-- ✅ **Tag-Based Execution** - Flexible test suite organization (@Smoke, @Regression, @E2E)
-
----
-
-## Technology Stack
-
-| Area | Tool |
-| --- | --- |
-| Language | Java |
-| Build | Maven |
-| Browser automation | Selenium WebDriver |
-| BDD | Cucumber JVM |
-| Test runner | TestNG |
-| Driver management | WebDriverManager |
-| Reporting | Allure, Extent, Cucumber reports |
-| Logging | Log4j2 |
-| CI/CD | GitHub Actions, Jenkins |
-
-Version numbers are managed in `pom.xml`. Check that file for the exact dependency versions used by the current branch.
-
-## Test Inventory
-
-| Area | Feature file | Scenario count |
-| --- | --- | ---: |
-| Login | `src/test/resources/features/Login.feature` | 6 |
-| Products and cart | `src/test/resources/features/ProductPurchase.feature` | 5 |
-| Checkout | `src/test/resources/features/E2ECheckout.feature` | 3 |
-
-Current automated UI scenario count: 14.
-
-## Realistic Metrics
-
-This project does not hard-code pass rate, coverage percentage, or defect reduction claims in the README. Those numbers should come from the latest CI run, generated reports, or a release-specific quality summary.
-
-Use these maintained signals instead:
-
-| Metric | Source |
-| --- | --- |
-| Build health | GitHub Actions badge and workflow runs |
-| Scenario results | Surefire, Cucumber, Allure, and Extent reports |
-| Execution duration | CI job duration and report timestamps |
-| Failed scenario evidence | Screenshots and Cucumber rerun output |
 
 ## Project Structure
 
-```text
+```
 selenium-cucumber-framework/
-├── .github/workflows/ci.yml
+├── .github/workflows/
+│   ├── ci.yml                  # Smoke tests on push/PR (Chrome headless)
+│   ├── cross-browser.yml       # Chrome + Firefox matrix on push/PR
+│   ├── allure-gh-pages.yml     # Publishes Allure report to GitHub Pages
+│   └── api-tests.yml           # API-only CI (Phase 2 branch)
 ├── Jenkinsfile
 ├── pom.xml
 ├── testng.xml
-├── src/main/java/com/automation/
-│   ├── constants/
-│   ├── pages/
-│   └── utils/
-├── src/main/resources/
-│   ├── config/config.properties
-│   └── log4j2.xml
-└── src/test/
-    ├── java/com/automation/
-    │   ├── listeners/
-    │   ├── runners/
-    │   └── stepdefinitions/
-    └── resources/
-        ├── features/
-        ├── allure.properties
-        ├── extent-config.xml
-        └── extent.properties
+└── src/
+    ├── main/java/com/automation/
+    │   ├── constants/           # FrameworkConstants (paths, env)
+    │   ├── pages/               # BasePage, LoginPage, ProductsPage, CheckoutPage
+    │   └── utils/               # DriverManager, ConfigReader, WaitHelper, ScreenshotUtil, TestDataReader
+    ├── main/resources/
+    │   ├── config/
+    │   │   ├── config.properties          # Base config (defaults)
+    │   │   └── environments/
+    │   │       ├── qa.properties          # Overlays for QA (default)
+    │   │       ├── staging.properties     # Overlays for staging
+    │   │       └── prod.properties        # Overlays for prod (smoke only)
+    │   └── log4j2.xml
+    └── test/
+        ├── java/com/automation/
+        │   ├── context/         # ScenarioContext (DI shared state), ApiContext
+        │   ├── listeners/       # AllureListener (TestNG)
+        │   ├── runners/         # TestRunner, FailedTestRunner
+        │   └── stepdefinitions/ # Hooks, LoginSteps, ProductSteps, CheckoutSteps, ApiSteps
+        └── resources/
+            ├── features/
+            │   ├── Login.feature
+            │   ├── ProductPurchase.feature
+            │   ├── E2ECheckout.feature
+            │   └── ApiTesting.feature
+            ├── testdata/
+            │   └── qa-test-data.properties
+            ├── cucumber.properties        # Default tag: @Regression
+            ├── allure.properties
+            └── extent.properties
 ```
 
-Generated directories such as `target/`, `test-output/`, `logs/`, report folders, and screenshots are ignored by Git.
-Selenium, Cucumber, and TestNG based end-to-end test automation framework for the SauceDemo sample e-commerce application. The framework uses the Page Object Model, reusable step definitions, configurable browser execution, and generated test reports for local and CI runs.
-
-## Current Scope
-
-- UI automation for SauceDemo login, product/cart, and checkout flows.
-- Cucumber BDD feature files with TestNG execution.
-- Page Object Model classes for screen-level behavior.
-- Config-driven browser, URL, wait, and reporting settings.
-- Screenshot capture for failed scenarios.
-- Allure, Extent, Cucumber HTML, JSON, and JUnit report outputs.
-- Jenkins pipeline and GitHub Actions workflow support.
-
-## Application Under Test
-
-SauceDemo: https://www.saucedemo.com/
-
-The credentials used in this project are public demo credentials provided by SauceDemo. They are test data, not private secrets.
-
-## Test Inventory
-
-| Area | Feature file | Scenario count |
-| --- | --- | ---: |
-| Login | `src/test/resources/features/Login.feature` | 6 |
-| Products and cart | `src/test/resources/features/ProductPurchase.feature` | 5 |
-| Checkout | `src/test/resources/features/E2ECheckout.feature` | 3 |
-
-Current automated UI scenario count: 14.
-
-## Realistic Metrics
-
-This project does not hard-code pass rate, coverage percentage, or defect reduction claims in the README. Those numbers should come from the latest CI run, generated reports, or a release-specific quality summary.
-
-Use these maintained signals instead:
-
-| Metric | Source |
-| --- | --- |
-| Build health | GitHub Actions badge and workflow runs |
-| Scenario results | Surefire, Cucumber, Allure, and Extent reports |
-| Execution duration | CI job duration and report timestamps |
-| Failed scenario evidence | Screenshots and Cucumber rerun output |
-
-## Project Structure
-
-```text
-selenium-cucumber-framework/
-├── .github/workflows/ci.yml
-├── Jenkinsfile
-├── pom.xml
-├── testng.xml
-├── src/main/java/com/automation/
-│   ├── constants/
-│   ├── pages/
-│   └── utils/
-├── src/main/resources/
-│   ├── config/config.properties
-│   └── log4j2.xml
-└── src/test/
-    ├── java/com/automation/
-    │   ├── listeners/
-    │   ├── runners/
-    │   └── stepdefinitions/
-    └── resources/
-        ├── features/
-        ├── allure.properties
-        ├── extent-config.xml
-        └── extent.properties
-```
-
-Generated directories such as `target/`, `test-output/`, `logs/`, report folders, and screenshots are ignored by Git.
+---
 
 ## Prerequisites
 
-- Java JDK 11 or newer.
-- Maven 3.6 or newer.
-- Chrome, Firefox, or Edge for local browser execution.
-- Git.
+- Java 17 (check: `java -version`)
+- Maven 3.6+ (check: `mvn -version`)
+- Chrome, Firefox, or Edge installed locally for non-headless runs
+- Git
 
-CI currently uses a Temurin JDK through GitHub Actions.
-## Technology Stack
+---
 
-| Area | Tool |
-| --- | --- |
-| Language | Java |
-| Build | Maven |
-| UI automation | Selenium WebDriver |
-| BDD | Cucumber JVM |
-| Test runner | TestNG |
-| API testing | RestAssured |
-| Driver management | WebDriverManager |
-| Reporting | Allure, Extent, Cucumber HTML/JSON/JUnit |
-| Logging | Log4j2 |
-| CI/CD | GitHub Actions, Jenkins |
+## Run Locally
 
-Version numbers are defined in `pom.xml`.
+### 1. Clone and compile
+
+```bash
+git clone https://github.com/krishnaharshap/selenium-cucumber-framework.git
+cd selenium-cucumber-framework
+mvn clean compile
+```
+
+### 2. Run smoke tests (Chrome, headed)
+
+```bash
+mvn clean test -Dcucumber.filter.tags="@Smoke"
+```
+
+### 3. Run smoke tests headless (matches CI exactly)
+
+```bash
+mvn clean test -Dbrowser=chrome -Dheadless=true -Dcucumber.filter.tags="@Smoke"
+```
+
+### 4. Run full regression suite
+
+```bash
+mvn clean test -Dcucumber.filter.tags="@Regression"
+```
+
+### 5. Run on a different browser
+
+```bash
+mvn clean test -Dbrowser=firefox -Dcucumber.filter.tags="@Smoke"
+mvn clean test -Dbrowser=edge    -Dcucumber.filter.tags="@Smoke"
+```
+
+### 6. Run against a different environment
+
+```bash
+mvn clean test -Pstaging -Dcucumber.filter.tags="@Smoke"
+mvn clean test -Pprod    -Dcucumber.filter.tags="@Smoke"
+```
+
+The `-P` profile loads the matching overlay from `src/main/resources/config/environments/`.
+Default environment is `qa` (active by default, no flag needed).
+
+### 7. Run API tests
+
+```bash
+mvn clean test -Dcucumber.filter.tags="@API"
+```
+
+### 8. Rerun only failed scenarios
+
+After any test run, a rerun file is written to `test-output/cucumber-reports/rerun.txt`.
+
+```bash
+mvn clean test -Dcucumber.features="@test-output/cucumber-reports/rerun.txt"
+```
+
+### 9. View Allure report locally
+
+```bash
+mvn allure:report
+mvn allure:serve
+```
+
+`allure:serve` opens a live browser tab. Results are in `target/allure-results/` after each run.
+
+---
 
 ## Configuration
 
-Primary config file:
-
-```text
-src/main/resources/config/config.properties
-```
-
-Common settings:
+Primary config: `src/main/resources/config/config.properties`
 
 ```properties
 browser=chrome
@@ -272,425 +173,99 @@ take.screenshot.on.failure=true
 api.base.url=https://jsonplaceholder.typicode.com
 ```
 
-## Running Tests
-
-Compile the project:
+Any property can be overridden at runtime with `-D`:
 
 ```bash
-mvn clean compile
+mvn clean test -Durl=https://your-app.com -Dbrowser=firefox -Dheadless=true
 ```
 
-Run all tests:
+Environment-specific overrides go in `src/main/resources/config/environments/<env>.properties` and are layered on top of the base config at runtime.
 
-```bash
-mvn clean test
-```
+---
 
-Run UI smoke tests:
+## Test Inventory
 
-```bash
-mvn clean test -Dcucumber.filter.tags="@Smoke"
-```
+| Area | Feature file | Scenarios |
+|---|---|---:|
+| Login | `Login.feature` | 6 |
+| Products and cart | `ProductPurchase.feature` | 5 |
+| End-to-end checkout | `E2ECheckout.feature` | 3 |
+| API (Phase 2) | `ApiTesting.feature` | 2 |
 
-Run API scenarios:
+Tags in use: `@Smoke`, `@Regression`, `@E2E`, `@Login`, `@Product`, `@API`, `@Positive`, `@Negative`
 
-```bash
-mvn clean test -Dcucumber.filter.tags="@API"
-```
+---
 
-Run headless:
+## CI/CD
 
-```bash
-mvn clean test -Dheadless=true
-```
+### GitHub Actions — free for public repos
 
-#### Run Specific Feature
-```bash
-mvn clean test -Dcucumber.features="src/test/resources/features/Login.feature"
-```
+This repo is public. GitHub Actions gives **unlimited free minutes** on Linux runners (`ubuntu-latest`) for public repositories. There is no cost and no monthly cap. If you ever move this to a private repo, the free tier is 2,000 minutes/month on Linux.
 
-```bash
-mvn clean test -Dheadless=true
-```
+Four workflows are active:
+
+| Workflow | File | Trigger | What it runs |
+|---|---|---|---|
+| CI smoke | `ci.yml` | push / PR to main, develop | `@Smoke` on Chrome headless |
+| Cross-browser | `cross-browser.yml` | push / PR to main, develop | `@Smoke` on Chrome + Firefox in parallel |
+| Allure Pages | `allure-gh-pages.yml` | after CI smoke completes | Publishes Allure report to GitHub Pages |
+| API tests | `api-tests.yml` | push to feat/api-scaffold | `@API` headless, no browser |
+
+To trigger manually: **Actions** tab → select workflow → **Run workflow** → pick branch → Run.
+
+### Allure report on GitHub Pages
+
+After `ci.yml` completes, `allure-gh-pages.yml` fires automatically and publishes the report with up to 20 runs of history.
+
+To activate on a fresh fork or after first run: **Settings → Pages → Source → Deploy from branch → `gh-pages` / root**
+
+Live URL: https://krishnaharshap.github.io/selenium-cucumber-framework/
+
+### Jenkins (local or corporate)
+
+The `Jenkinsfile` sets up a parameterized pipeline:
+
+| Parameter | Options | Default |
+|---|---|---|
+| BROWSER | chrome, firefox, edge | chrome |
+| TAGS | @Smoke, @Regression, @E2E, @Login, @Product | @Regression |
+| HEADLESS | true / false | false |
+
+Jenkins prerequisites: JDK-17 configured in Global Tool Configuration as `JDK-17`, Maven configured as `Maven-3.9.5`.
+
+Plugins needed for full reporting: Allure Jenkins Plugin, HTML Publisher Plugin, Email Extension Plugin.
+
+---
 
 ## Reports
 
-| Report | Output |
-| --- | --- |
+| Report | Location after run |
+|---|---|
 | Cucumber HTML | `test-output/cucumber-reports/cucumber.html` |
 | Cucumber JSON | `test-output/cucumber-reports/cucumber.json` |
-| Cucumber JUnit XML | `test-output/cucumber-reports/cucumber.xml` |
 | Allure results | `target/allure-results/` |
-| Allure report | `target/site/allure-maven-plugin/index.html` |
+| Allure HTML | `target/site/allure-maven-plugin/index.html` (after `mvn allure:report`) |
 | Extent report | `test-output/extent-reports/` |
+| Failed rerun list | `test-output/cucumber-reports/rerun.txt` |
 | Screenshots | `test-output/screenshots/` |
 
-Generate an Allure report:
-
-### Test Execution Strategies
-
-| Strategy | Tag | Duration | Use Case |
-|----------|-----|----------|----------|
-| **Smoke** | `@Smoke` | 5-7 min | Quick validation on every commit |
-| **Regression** | `@Regression` | 15-20 min | Complete validation before release |
-| **E2E** | `@E2E` | 10-12 min | Business flow validation |
-| **Positive** | `@Positive` | - | Happy path scenarios |
-| **Negative** | `@Negative` | - | Error handling validation |
+CI artifacts (Surefire reports, Cucumber reports, Allure results) are uploaded on every workflow run under **Actions → [run] → Artifacts**.
 
 ---
 
-## Test Reports
+## Key Design Decisions
 
-### Allure Reports
+**Picocontainer DI** — `ScenarioContext` is injected once per scenario into all step definition classes by Picocontainer. All page objects live in the context, so `LoginSteps`, `ProductSteps`, and `CheckoutSteps` share the same page instances for a given scenario. No static state.
 
-#### Generate and View
-```bash
-mvn allure:report
-```
+**AUT-agnostic config** — The framework is not hardwired to SauceDemo. Change `url` in `config.properties` or override with `-Durl=`. The generic `addProductToCart(String)` step derives button IDs from product names so product tests work against any standard e-commerce app.
 
-Serve an Allure report locally:
+**Parallel-ready** — `DriverManager` uses `ThreadLocal<WebDriver>`. To enable parallel execution, change `parallel="none"` to `parallel="methods"` in `testng.xml` and set a thread count. Leave at `none` until scenarios are confirmed flake-free.
 
-#### Features:
-- ✅ Interactive HTML dashboard
-- ✅ Test execution trends and history
-- ✅ Step-by-step execution breakdown
-- ✅ Screenshot attachments
-- ✅ Timeline and duration metrics
-- ✅ Categorization by severity and features
-- ✅ Environment information
-
-### Extent Reports
-
-**Report Location:** `test-output/extent-reports/ExtentReport_[timestamp].html`
-
-#### Features:
-- ✅ Executive summary dashboard
-- ✅ Pass/Fail statistics with charts
-- ✅ Pie charts and visual representations
-- ✅ Detailed error logs
-- ✅ Embedded screenshots
-- ✅ System information
-- ✅ Customizable themes
-
-### Cucumber Reports
-
-**Report Location:** `test-output/cucumber-reports/cucumber.html`
-
-#### Features:
-- ✅ Scenario-wise execution details
-- ✅ Step-level pass/fail status
-- ✅ Execution duration
-- ✅ Feature-wise grouping
-
-### Report Comparison
-
-| Feature | Allure | Extent | Cucumber |
-|---------|--------|--------|----------|
-| Visual Dashboard | ✅ | ✅ | ❌ |
-| Historical Trends | ✅ | ❌ | ❌ |
-| Screenshots | ✅ | ✅ | ✅ |
-| Step Details | ✅ | ✅ | ✅ |
-| Charts/Graphs | ✅ | ✅ | ❌ |
-| Executive Summary | ✅ | ✅ | ❌ |
-
----
-
-## CI/CD Integration
-
-### GitHub Actions
-
-**File:** `.github/workflows/ci.yml`
-
-The primary CI workflow runs a Chrome headless smoke suite on pushes to long-lived and review branches, and on pull requests into `develop` or `main`.
-
-```bash
-mvn -B -ntp test -Dbrowser=chrome -Dheadless=true "-Dcucumber.filter.tags=@Smoke"
-```
-
-Workflow artifacts include Surefire reports, Cucumber reports, screenshots, and Allure results when available.
-
-### Jenkins Pipeline
-
-**File:** `Jenkinsfile`
-
-#### Pipeline Stages:
-1. **Checkout** - Clone repository from SCM
-2. **Clean** - Remove previous build artifacts
-3. **Compile** - Compile source code
-4. **Run Tests** - Execute test suite with parameters
-5. **Generate Reports** - Create Allure and Extent reports
-6. **Post Actions** - Publish reports and send notifications
-
-#### Parameterized Build
-
-| Parameter | Type | Options | Description |
-|-----------|------|---------|-------------|
-| BROWSER | Choice | chrome, firefox, edge | Browser for execution |
-| TAGS | Choice | @Smoke, @Regression, @E2E | Test tags to execute |
-| HEADLESS | Boolean | true, false | Headless mode toggle |
-
-#### Jenkins Setup
-
-```groovy
-pipeline {
-    agent any
-    
-    parameters {
-        choice(name: 'BROWSER', choices: ['chrome', 'firefox', 'edge'])
-        choice(name: 'TAGS', choices: ['@Smoke', '@Regression', '@E2E'])
-        booleanParam(name: 'HEADLESS', defaultValue: false)
-    }
-    
-    stages {
-        stage('Run Tests') {
-            steps {
-                bat "mvn clean test -Dbrowser=${BROWSER} -Dcucumber.filter.tags=${TAGS}"
-            }
-        }
-    }
-}
-```
-
-#### Report Publishing
-- Allure Reports published via Allure Jenkins Plugin
-- Extent Reports published via HTML Publisher Plugin
-- Cucumber Reports archived as build artifacts
-
-#### Email Notifications
-- Success emails with report links
-- Failure emails with console output
-- Configurable recipient list
-
-### Scheduled Builds
-```groovy
-triggers {
-    cron('H 2 * * 1-5')  // Nightly at 2 AM, weekdays
-}
-```
-
----
-
-## Test Coverage
-
-### Modules Automated
-
-#### 1. Login Module (6 Scenarios)
-- ✅ Valid login with standard user
-- ✅ Invalid username validation
-- ✅ Invalid password validation
-- ✅ Locked user handling
-- ✅ Step-by-step login flow
-- ✅ Data-driven login scenarios
-
-#### 2. Product Management (5 Scenarios)
-- ✅ Add single product to cart
-- ✅ Add multiple products to cart
-- ✅ Remove product from cart
-- ✅ View cart with products
-- ✅ Product count validation
-
-#### 3. Checkout Process (3 Scenarios)
-- ✅ Complete E2E purchase flow
-- ✅ Single item checkout
-- ✅ Multi-user checkout validation
-
-### Coverage Metrics
-
-| Metric | Value |
-|--------|-------|
-| **Total Scenarios** | 14+ |
-| **Functional Coverage** | Track through CI artifacts and test inventory |
-| **Critical Path Coverage** | Login, cart, and checkout smoke paths |
-| **Pass Rate** | Reported by GitHub Actions and Jenkins runs |
-| **Automated vs Manual** | Review per release scope |
-
----
-
-## Best Practices
-
-### Code Quality
-- ✅ Follow SOLID principles
-- ✅ Implement DRY (Don't Repeat Yourself)
-- ✅ Use meaningful variable and method names
-- ✅ Add comments for complex logic
-- ✅ Maintain consistent code formatting
-
-### Test Design
-- ✅ Write independent test scenarios
-- ✅ Use appropriate wait strategies
-- ✅ Avoid hard-coded values
-- ✅ Implement proper exception handling
-- ✅ Keep tests atomic and focused
-
-### Framework Maintenance
-- ✅ Regular dependency updates
-- ✅ Code review for all changes
-- ✅ Refactor duplicate code
-- ✅ Update documentation
-- ✅ Monitor test flakiness
-
-### Naming Conventions
-
-```java
-// Page Objects
-public class LoginPage extends BasePage {}
-
-// Step Definitions
-@Given("user is on the login page")
-public void userIsOnTheLoginPage() {}
-
-// Feature Files
-Feature: User Login Functionality
-  Scenario: Successful login with valid credentials
-```
-
----
-
-## Troubleshooting
-
-### Common Issues & Solutions
-
-#### Issue 1: Maven Dependencies Not Downloading
-```bash
-mvn allure:serve
-```
-
-## CI/CD
-
-### GitHub Actions
-
-Workflow file:
-
-```text
-.github/workflows/ci.yml
-```
-
-The workflow runs Maven tests for pushes and pull requests targeting the main development branches. Test reports and build artifacts should be reviewed from the workflow run rather than represented as static README claims.
-
-### Jenkins
-
-Pipeline file:
-
-```text
-Jenkinsfile
-```
-
-The Jenkins pipeline supports parameterized browser, tag, and headless execution, then publishes available test reports and archives artifacts.
-
-## Branching and Commit Convention
-
-Use small branches with clear ownership:
-#### Issue 2: WebDriver Not Found
-```bash
-mvn allure:serve
-```
-
-## CI/CD
-
-GitHub Actions workflow:
-
-```text
-.github/workflows/ci.yml
-```
-
-The workflow is intended to run a headless Chrome smoke suite on pushes and pull requests.
-
-Jenkins pipeline:
-
-```text
-Jenkinsfile
-```
-
-The Jenkins pipeline supports browser, tag, and headless parameters.
-
-## Realistic Metrics
-
-This README avoids fixed pass-rate and coverage claims. Use the latest workflow run and report artifacts for:
-
-| Metric | Source |
-| --- | --- |
-| Build health | GitHub Actions and Jenkins run results |
-| Scenario results | Cucumber, Allure, Extent, and Surefire outputs |
-| Execution duration | CI job timestamps |
-| Failed scenario evidence | Screenshots and rerun output |
-
-## Repository Layout
-
-```text
-selenium-cucumber-framework/
-├── .github/workflows/ci.yml
-├── Jenkinsfile
-├── pom.xml
-├── testng.xml
-├── src/main/java/com/automation/
-├── src/main/resources/
-└── src/test/
-```
+**Cross-browser** — CI runs Chrome + Firefox in parallel via matrix. Edge is supported in `DriverManager` locally but excluded from the CI matrix (install complexity on ubuntu-latest).
 
 ---
 
 ## Contact
 
-### Project Maintainer
-**Krishna Harsha**  
-Email: krishnaharshap11@gmail.com  
-LinkedIn: [linkedin.com/in/krishnap](https://linkedin.com/in/krishnap)  
-GitHub: [github.com/krishnaharshap](https://github.com/krishnaharshap)
-
-### Support Channels
-- **Bug Reports:** [GitHub Issues](https://github.com/krishnaharshap/selenium-cucumber-framework/issues)
-- **Feature Requests:** [GitHub Discussions](https://github.com/krishnaharshap/selenium-cucumber-framework/discussions)
-- **Email:** krishnaharshap11@gmail.com
-
----
-
-## Acknowledgments
-
-- **SauceDemo** for providing the test application
-- **Selenium Community** for excellent documentation and support
-- **Cucumber Team** for the BDD framework
-- **Allure & Extent** teams for reporting solutions
-- **Open Source Community** for continuous improvements
-
----
-
-## Project Insight & Community
-
-![Stars](https://img.shields.io/github/stars/krishnaharshap/selenium-cucumber-framework?style=social)  
-![Forks](https://img.shields.io/github/forks/krishnaharshap/selenium-cucumber-framework?style=social)  
-![Issues](https://img.shields.io/github/issues/krishnaharshap/selenium-cucumber-framework)  
-![Pull Requests](https://img.shields.io/github/issues-pr/krishnaharshap/selenium-cucumber-framework)
-
-> Help us build **together** — see community metrics & learn how to contribute:  
-[🔗 Community Graph & Contribution Guide](https://github.com/krishnaharshap/selenium-cucumber-framework/graphs/community)
-
----
-
-## Roadmap
-
-Planned work should stay scoped and merge in reviewable increments:
-
-- API testing integration with RestAssured.
-- Dependency and reporting cleanup.
-- Improved CI smoke execution and artifact publishing.
-- Test data cleanup and externalization.
-
-Avoid documenting mobile, visual, performance, database, or container automation as implemented until those capabilities exist in the codebase.
-
-## Maintenance Notes
-
-- Keep README claims tied to files, commands, or generated reports.
-- Do not commit generated reports, browser artifacts, screenshots, logs, local IDE files, or secrets.
-- Prefer small pull requests that can be checked independently by CI.
-- Update this README when framework behavior, CI commands, or report paths change.
-
-## Repository
-
-- Keep generated reports, screenshots, logs, and local IDE files out of Git.
-- Keep branch names short and descriptive.
-- Update this README when the framework structure or CI flow changes.
-
-**Last Updated:** May 2026  
-**Version:** 1.0.0  
-**Status:** Active
-**Maintainer:** Krishna Harsha
+Krishna Harsha — krishnaharshap11@gmail.com  
+GitHub: https://github.com/krishnaharshap
