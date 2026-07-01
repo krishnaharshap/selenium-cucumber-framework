@@ -8,6 +8,8 @@ on:
     branches: [main, develop]
     types: [completed]
   workflow_dispatch:
+  push:
+    branches: [main, develop]
 
 permissions:
   contents: write    # needed to push to gh-pages branch
