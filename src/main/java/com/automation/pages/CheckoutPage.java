@@ -67,7 +67,9 @@ public class CheckoutPage extends BasePage {
     @Step("Click checkout button")
     public CheckoutPage clickCheckout() {
         logger.info("Clicking checkout button");
-        click(checkoutButton);
+        wait.until(ExpectedConditions.elementToBeClickable(checkoutButton));
+        jsClick(checkoutButton);
+        wait.until(ExpectedConditions.urlContains("/checkout-step-one.html"));
         return this;
     }
 
@@ -93,7 +95,9 @@ public class CheckoutPage extends BasePage {
     @Step("Click continue button")
     public CheckoutPage clickContinue() {
         logger.info("Clicking continue button");
-        click(continueButton);
+        wait.until(ExpectedConditions.elementToBeClickable(continueButton));
+        jsClick(continueButton);
+        wait.until(ExpectedConditions.urlContains("/checkout-step-two.html"));
         return this;
     }
 
@@ -107,13 +111,16 @@ public class CheckoutPage extends BasePage {
     @Step("Click finish button")
     public CheckoutPage clickFinish() {
         logger.info("Clicking finish button");
-        click(finishButton);
+        wait.until(ExpectedConditions.elementToBeClickable(finishButton));
+        jsClick(finishButton);
+        wait.until(ExpectedConditions.urlContains("/checkout-complete.html"));
         return this;
     }
 
     @Step("Verify order confirmation")
     public boolean isOrderConfirmed() {
         logger.info("Verifying order confirmation");
+        wait.until(ExpectedConditions.visibilityOf(orderConfirmationHeader));
         return orderConfirmationHeader.isDisplayed() &&
                 getText(orderConfirmationHeader).equals("Thank you for your order!");
     }

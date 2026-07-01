@@ -109,15 +109,19 @@ public class ProductsPage extends BasePage {
     @Step("Add product to cart: {productName}")
     public ProductsPage addProductToCart(String productName) {
         String buttonId = "add-to-cart-" + productName.toLowerCase().replace(" ", "-");
+        String removeId = "remove-" + productName.toLowerCase().replace(" ", "-");
         logger.info("Adding product '{}' to cart (id={})", productName, buttonId);
-        click(By.id(buttonId));
+        WebElement addButton = wait.until(ExpectedConditions.elementToBeClickable(By.id(buttonId)));
+        jsClick(addButton);
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id(removeId)));
         return this;
     }
 
     @Step("Click shopping cart icon")
     public CheckoutPage clickShoppingCart() {
         logger.info("Clicking shopping cart icon");
-        click(shoppingCartIcon);
+        wait.until(ExpectedConditions.elementToBeClickable(shoppingCartIcon));
+        jsClick(shoppingCartIcon);
         wait.until(ExpectedConditions.urlContains("/cart.html"));
         return new CheckoutPage(driver);
     }
