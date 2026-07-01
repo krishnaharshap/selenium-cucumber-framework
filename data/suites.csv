@@ -1,0 +1,22 @@
+"Status","Start Time","Stop Time","Duration in ms","Parent Suite","Suite","Sub Suite","Test Class","Test Method","Name","Description"
+"passed","Wed Jul 01 18:22:43 UTC 2026","Wed Jul 01 18:22:45 UTC 2026","1352","","End-to-End Checkout Process","","Complete purchase with different user data","","Complete purchase with different user data","  As a customer
+  I want to complete the full purchase flow
+  So that I can successfully order products"
+"passed","Wed Jul 01 18:22:41 UTC 2026","Wed Jul 01 18:22:42 UTC 2026","1381","","End-to-End Checkout Process","","Complete purchase with different user data","","Complete purchase with different user data","  As a customer
+  I want to complete the full purchase flow
+  So that I can successfully order products"
+"passed","Wed Jul 01 18:22:42 UTC 2026","Wed Jul 01 18:22:43 UTC 2026","1443","","End-to-End Checkout Process","","Complete purchase with different user data","","Complete purchase with different user data","  As a customer
+  I want to complete the full purchase flow
+  So that I can successfully order products"
+"passed","Wed Jul 01 18:22:46 UTC 2026","Wed Jul 01 18:22:47 UTC 2026","1113","","Product Management and Cart Functionality","","Add single product to cart","","Add single product to cart","  As a logged-in user
+  I want to add and remove products from cart
+  So that I can manage my shopping cart"
+"passed","Wed Jul 01 18:22:45 UTC 2026","Wed Jul 01 18:22:46 UTC 2026","1051","","User Login Functionality","","Successful login with valid credentials","","Successful login with valid credentials","  As a user of the SauceDemo application
+  I want to be able to login with valid credentials
+  So that I can access the products page"
+"passed","Wed Jul 01 18:22:39 UTC 2026","Wed Jul 01 18:22:41 UTC 2026","1431","","End-to-End Checkout Process","","Purchase single item with complete checkout","","Purchase single item with complete checkout","  As a customer
+  I want to complete the full purchase flow
+  So that I can successfully order products"
+"passed","Wed Jul 01 18:22:25 UTC 2026","Wed Jul 01 18:22:39 UTC 2026","13949","","End-to-End Checkout Process","","Complete end-to-end purchase flow","","Complete end-to-end purchase flow","  As a customer
+  I want to complete the full purchase flow
+  So that I can successfully order products"

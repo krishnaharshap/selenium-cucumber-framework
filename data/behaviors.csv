@@ -1,0 +1,6 @@
+"Epic","Feature","Story","FAILED","BROKEN","PASSED","SKIPPED","UNKNOWN"
+"","End-to-End Checkout Process","Complete purchase with different user data","0","0","3","0","0"
+"","Product Management and Cart Functionality","Add single product to cart","0","0","1","0","0"
+"","User Login Functionality","Successful login with valid credentials","0","0","1","0","0"
+"","End-to-End Checkout Process","Purchase single item with complete checkout","0","0","1","0","0"
+"","End-to-End Checkout Process","Complete end-to-end purchase flow","0","0","1","0","0"
