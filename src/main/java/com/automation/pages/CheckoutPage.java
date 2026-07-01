@@ -68,6 +68,7 @@ public class CheckoutPage extends BasePage {
     public CheckoutPage clickCheckout() {
         logger.info("Clicking checkout button");
         click(checkoutButton);
+        wait.until(ExpectedConditions.urlContains("/checkout-step-one.html"));
         return this;
     }
 

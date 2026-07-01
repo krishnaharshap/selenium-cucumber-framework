@@ -109,8 +109,10 @@ public class ProductsPage extends BasePage {
     @Step("Add product to cart: {productName}")
     public ProductsPage addProductToCart(String productName) {
         String buttonId = "add-to-cart-" + productName.toLowerCase().replace(" ", "-");
+        String removeId = "remove-" + productName.toLowerCase().replace(" ", "-");
         logger.info("Adding product '{}' to cart (id={})", productName, buttonId);
         click(By.id(buttonId));
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id(removeId)));
         return this;
     }
 
