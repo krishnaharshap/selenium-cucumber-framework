@@ -1,22 +1,22 @@
 "Status","Start Time","Stop Time","Duration in ms","Parent Suite","Suite","Sub Suite","Test Class","Test Method","Name","Description"
-"passed","Sun Jul 19 18:47:07 UTC 2026","Sun Jul 19 18:47:08 UTC 2026","783","","User Login Functionality","","Successful login with valid credentials","","Successful login with valid credentials","  As a user of the SauceDemo application
+"passed","Sun Jul 19 18:47:47 UTC 2026","Sun Jul 19 18:47:59 UTC 2026","11687","","End-to-End Checkout Process","","Complete end-to-end purchase flow","","Complete end-to-end purchase flow","  As a customer
+  I want to complete the full purchase flow
+  So that I can successfully order products"
+"passed","Sun Jul 19 18:48:01 UTC 2026","Sun Jul 19 18:48:02 UTC 2026","1434","","End-to-End Checkout Process","","Complete purchase with different user data","","Complete purchase with different user data","  As a customer
+  I want to complete the full purchase flow
+  So that I can successfully order products"
+"passed","Sun Jul 19 18:48:05 UTC 2026","Sun Jul 19 18:48:06 UTC 2026","1119","","User Login Functionality","","Successful login with valid credentials","","Successful login with valid credentials","  As a user of the SauceDemo application
   I want to be able to login with valid credentials
   So that I can access the products page"
-"passed","Sun Jul 19 18:46:55 UTC 2026","Sun Jul 19 18:47:02 UTC 2026","7960","","End-to-End Checkout Process","","Complete end-to-end purchase flow","","Complete end-to-end purchase flow","  As a customer
+"passed","Sun Jul 19 18:47:59 UTC 2026","Sun Jul 19 18:48:01 UTC 2026","1514","","End-to-End Checkout Process","","Purchase single item with complete checkout","","Purchase single item with complete checkout","  As a customer
   I want to complete the full purchase flow
   So that I can successfully order products"
-"passed","Sun Jul 19 18:47:06 UTC 2026","Sun Jul 19 18:47:07 UTC 2026","1025","","End-to-End Checkout Process","","Complete purchase with different user data","","Complete purchase with different user data","  As a customer
-  I want to complete the full purchase flow
-  So that I can successfully order products"
-"passed","Sun Jul 19 18:47:08 UTC 2026","Sun Jul 19 18:47:08 UTC 2026","908","","Product Management and Cart Functionality","","Add single product to cart","","Add single product to cart","  As a logged-in user
+"passed","Sun Jul 19 18:48:06 UTC 2026","Sun Jul 19 18:48:07 UTC 2026","1106","","Product Management and Cart Functionality","","Add single product to cart","","Add single product to cart","  As a logged-in user
   I want to add and remove products from cart
   So that I can manage my shopping cart"
-"passed","Sun Jul 19 18:47:04 UTC 2026","Sun Jul 19 18:47:05 UTC 2026","1075","","End-to-End Checkout Process","","Complete purchase with different user data","","Complete purchase with different user data","  As a customer
+"passed","Sun Jul 19 18:48:03 UTC 2026","Sun Jul 19 18:48:05 UTC 2026","1392","","End-to-End Checkout Process","","Complete purchase with different user data","","Complete purchase with different user data","  As a customer
   I want to complete the full purchase flow
   So that I can successfully order products"
-"passed","Sun Jul 19 18:47:05 UTC 2026","Sun Jul 19 18:47:06 UTC 2026","1052","","End-to-End Checkout Process","","Complete purchase with different user data","","Complete purchase with different user data","  As a customer
-  I want to complete the full purchase flow
-  So that I can successfully order products"
-"passed","Sun Jul 19 18:47:03 UTC 2026","Sun Jul 19 18:47:04 UTC 2026","1133","","End-to-End Checkout Process","","Purchase single item with complete checkout","","Purchase single item with complete checkout","  As a customer
+"passed","Sun Jul 19 18:48:02 UTC 2026","Sun Jul 19 18:48:03 UTC 2026","1352","","End-to-End Checkout Process","","Complete purchase with different user data","","Complete purchase with different user data","  As a customer
   I want to complete the full purchase flow
   So that I can successfully order products"
