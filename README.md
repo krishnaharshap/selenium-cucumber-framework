@@ -205,7 +205,7 @@ Tags in use: `@Smoke`, `@Regression`, `@E2E`, `@Login`, `@Product`, `@API`, `@Po
 
 This repo is public. GitHub Actions gives **unlimited free minutes** on Linux runners (`ubuntu-latest`) for public repositories. There is no cost and no monthly cap. If you ever move this to a private repo, the free tier is 2,000 minutes/month on Linux.
 
-Four workflows are active:
+Five workflows are active:
 
 | Workflow | File | Trigger | What it runs |
 |---|---|---|---|
@@ -213,6 +213,7 @@ Four workflows are active:
 | Cross-browser | `cross-browser.yml` | push / PR to main, develop | `@Smoke` on Chrome + Firefox in parallel |
 | Allure Pages | `allure-gh-pages.yml` | after CI smoke completes | Publishes Allure report to GitHub Pages |
 | API tests | `api-tests.yml` | push to feat/api-scaffold | `@API` headless, no browser |
+| Full regression | `regression.yml` | nightly (cron) + manual dispatch | Configurable tag filter (default `@Regression`) and browser (chrome/firefox), full report artifacts |
 
 To trigger manually: **Actions** tab → select workflow → **Run workflow** → pick branch → Run.
 
