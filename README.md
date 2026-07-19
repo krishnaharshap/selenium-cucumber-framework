@@ -26,6 +26,7 @@ End-to-end test automation framework built with Selenium 4, Cucumber 7, and Test
 | Driver management | WebDriverManager | 6.3.4 |
 | API testing | RestAssured | 5.5.5 |
 | Reporting | Allure | 2.34.0 |
+| Reporting (secondary) | ExtentReports | 5.1.2 |
 | Logging | Log4j2 | 2.x |
 | CI | GitHub Actions + Jenkins | — |
 
@@ -49,7 +50,7 @@ selenium-cucumber-framework/
     ├── main/java/com/automation/
     │   ├── constants/           # FrameworkConstants (paths, env)
     │   ├── pages/               # BasePage, LoginPage, ProductsPage, CheckoutPage
-    │   └── utils/               # DriverManager, ConfigReader, WaitHelper, ScreenshotUtil, TestDataReader
+    │   └── utils/               # DriverManager, ConfigReader, WaitHelper, ScreenshotUtil
     ├── main/resources/
     │   ├── config/
     │   │   ├── config.properties          # Base config (defaults)
@@ -61,9 +62,10 @@ selenium-cucumber-framework/
     └── test/
         ├── java/com/automation/
         │   ├── context/         # ScenarioContext (DI shared state), ApiContext
-        │   ├── listeners/       # AllureListener (TestNG)
+        │   ├── listeners/       # AllureListener, ExtentListener (both TestNG)
         │   ├── runners/         # TestRunner, FailedTestRunner
-        │   └── stepdefinitions/ # Hooks, LoginSteps, ProductSteps, CheckoutSteps, ApiSteps
+        │   ├── stepdefinitions/ # Hooks, LoginSteps, ProductSteps, CheckoutSteps, ApiSteps
+        │   └── utils/           # TestDataReader, ExtentManager
         └── resources/
             ├── features/
             │   ├── Login.feature
@@ -71,7 +73,8 @@ selenium-cucumber-framework/
             │   ├── E2ECheckout.feature
             │   └── ApiTesting.feature
             ├── testdata/
-            │   └── qa-test-data.properties
+            │   ├── qa-test-data.properties
+            │   └── saucedemo-test-data.properties
             ├── cucumber.properties        # Default tag: @Regression
             ├── allure.properties
             └── extent.properties

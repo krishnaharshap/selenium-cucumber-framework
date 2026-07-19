@@ -1,10 +1,12 @@
 package com.automation.stepdefinitions;
 
 import com.automation.context.ScenarioContext;
+import com.automation.listeners.ExtentListener;
 import com.automation.utils.ConfigReader;
 import com.automation.utils.DriverManager;
 import com.automation.utils.ScreenshotUtil;
 import com.automation.utils.WaitHelper;
+import com.aventstack.extentreports.ExtentTest;
 import io.cucumber.java.After;
 import io.cucumber.java.Before;
 import io.cucumber.java.Scenario;
@@ -14,6 +16,7 @@ import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.WebDriver;
 
 import java.io.ByteArrayInputStream;
+import java.util.Base64;
 
 public class Hooks {
 
@@ -57,6 +60,12 @@ public class Hooks {
                 if (screenshot.length > 0) {
                     Allure.addAttachment("Failed Screenshot", "image/png",
                             new ByteArrayInputStream(screenshot), "png");
+
+                    ExtentTest extentTest = ExtentListener.getCurrentTest();
+                    if (extentTest != null) {
+                        extentTest.fail("Screenshot on failure")
+                                .addScreenCaptureFromBase64String(Base64.getEncoder().encodeToString(screenshot));
+                    }
                 }
             }
         } catch (Exception e) {
