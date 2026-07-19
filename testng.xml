@@ -4,6 +4,7 @@
 
     <listeners>
         <listener class-name="com.automation.listeners.AllureListener"/>
+        <listener class-name="com.automation.listeners.ExtentListener"/>
     </listeners>
 
     <test name="Regression Tests">
