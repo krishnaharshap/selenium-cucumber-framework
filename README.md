@@ -3,8 +3,8 @@
 [![CI](https://github.com/krishnaharshap/selenium-cucumber-framework/actions/workflows/ci.yml/badge.svg?branch=main)](https://github.com/krishnaharshap/selenium-cucumber-framework/actions/workflows/ci.yml)
 [![Cross-Browser](https://github.com/krishnaharshap/selenium-cucumber-framework/actions/workflows/cross-browser.yml/badge.svg?branch=main)](https://github.com/krishnaharshap/selenium-cucumber-framework/actions/workflows/cross-browser.yml)
 [![Java](https://img.shields.io/badge/Java-17-orange)](https://www.oracle.com/java/)
-[![Selenium](https://img.shields.io/badge/Selenium-4.43.0-green)](https://www.selenium.dev/)
-[![Cucumber](https://img.shields.io/badge/Cucumber-7.34.3-brightgreen)](https://cucumber.io/)
+[![Selenium](https://img.shields.io/badge/Selenium-4.46.0-green)](https://www.selenium.dev/)
+[![Cucumber](https://img.shields.io/badge/Cucumber-7.34.4-brightgreen)](https://cucumber.io/)
 [![License](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
 
 End-to-end test automation framework built with Selenium 4, Cucumber 7, and TestNG. Designed as an AUT-agnostic, portfolio-quality framework that demonstrates real-world automation engineering practices: Page Object Model, Picocontainer dependency injection, multi-environment config, cross-browser CI, and automated Allure report publishing on GitHub Pages.
@@ -19,13 +19,13 @@ End-to-end test automation framework built with Selenium 4, Cucumber 7, and Test
 |---|---|---|
 | Language | Java | 17 |
 | Build | Maven | 3.6+ |
-| Browser automation | Selenium WebDriver | 4.43.0 |
-| BDD | Cucumber JVM | 7.34.3 |
+| Browser automation | Selenium WebDriver | 4.46.0 |
+| BDD | Cucumber JVM | 7.34.4 |
 | Test runner | TestNG | 7.12 |
 | Dependency injection | Picocontainer | via cucumber-picocontainer |
 | Driver management | WebDriverManager | 6.3.4 |
-| API testing | RestAssured | 5.5.5 |
-| Reporting | Allure | 2.34.0 |
+| API testing | RestAssured | 6.0.1 |
+| Reporting | Allure | 2.35.3 |
 | Reporting (secondary) | ExtentReports | 5.1.2 |
 | Logging | Log4j2 | 2.x |
 | CI | GitHub Actions + Jenkins | — |
