@@ -219,7 +219,7 @@ To trigger manually: **Actions** tab → select workflow → **Run workflow** �
 
 ### Allure report on GitHub Pages
 
-After `ci.yml` completes, `allure-gh-pages.yml` fires automatically: it re-runs `@Smoke`, generates the report with the Allure CLI (`allure generate`), carries forward trend history from the current `gh-pages` branch, and publishes the result.
+After `ci.yml` completes, `allure-gh-pages.yml` fires automatically: it re-runs `@Smoke`, generates the report with the Allure CLI (`allure generate`), carries forward trend history from the current `gh-pages` branch, and publishes the result. The nightly `regression.yml` run publishes the same way right after its own test run, so the report also refreshes every night with the full `@Regression` suite even if nobody pushed code that day. Both paths share the deploy logic through the composite action at `.github/actions/publish-allure-report`.
 
 To activate on a fresh fork or after first run: **Settings → Pages → Source → Deploy from branch → `gh-pages` / root**. The `gh-pages` branch is created automatically the first time the workflow runs (via push to `main`/`develop` or manual dispatch from the Actions tab) — Pages can't be enabled until it exists.
 
