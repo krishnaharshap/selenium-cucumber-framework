@@ -19,7 +19,7 @@ on:
           - firefox
 
 permissions:
-  contents: read
+  contents: write    # needed to push the Allure report to gh-pages
 
 jobs:
   regression:
@@ -51,6 +51,13 @@ jobs:
           -Dbrowser=${{ inputs.browser || 'chrome' }}
           -Dheadless=true
           "-Dcucumber.filter.tags=${{ inputs.tags || '@Regression' }}"
+
+      - name: Publish Allure Report
+        uses: ./.github/actions/publish-allure-report
+        if: always()
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          commit-message: "chore: update Allure report from nightly regression [skip ci]"
 
       - name: Upload test reports
         if: always()

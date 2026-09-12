@@ -3,8 +3,8 @@
 [![CI](https://github.com/krishnaharshap/selenium-cucumber-framework/actions/workflows/ci.yml/badge.svg?branch=main)](https://github.com/krishnaharshap/selenium-cucumber-framework/actions/workflows/ci.yml)
 [![Cross-Browser](https://github.com/krishnaharshap/selenium-cucumber-framework/actions/workflows/cross-browser.yml/badge.svg?branch=main)](https://github.com/krishnaharshap/selenium-cucumber-framework/actions/workflows/cross-browser.yml)
 [![Java](https://img.shields.io/badge/Java-17-orange)](https://www.oracle.com/java/)
-[![Selenium](https://img.shields.io/badge/Selenium-4.46.0-green)](https://www.selenium.dev/)
-[![Cucumber](https://img.shields.io/badge/Cucumber-7.34.4-brightgreen)](https://cucumber.io/)
+[![Selenium](https://img.shields.io/badge/Selenium-4.49.0-green)](https://www.selenium.dev/)
+[![Cucumber](https://img.shields.io/badge/Cucumber-7.34.8-brightgreen)](https://cucumber.io/)
 [![License](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
 
 End-to-end test automation framework built with Selenium 4, Cucumber 7, and TestNG. Designed as an AUT-agnostic, portfolio-quality framework that demonstrates real-world automation engineering practices: Page Object Model, Picocontainer dependency injection, multi-environment config, cross-browser CI, and automated Allure report publishing on GitHub Pages.
@@ -19,8 +19,8 @@ End-to-end test automation framework built with Selenium 4, Cucumber 7, and Test
 |---|---|---|
 | Language | Java | 17 |
 | Build | Maven | 3.6+ |
-| Browser automation | Selenium WebDriver | 4.46.0 |
-| BDD | Cucumber JVM | 7.34.4 |
+| Browser automation | Selenium WebDriver | 4.49.0 |
+| BDD | Cucumber JVM | 7.34.8 |
 | Test runner | TestNG | 7.12 |
 | Dependency injection | Picocontainer | via cucumber-picocontainer |
 | Driver management | WebDriverManager | 6.3.4 |
@@ -28,7 +28,7 @@ End-to-end test automation framework built with Selenium 4, Cucumber 7, and Test
 | Reporting | Allure | 2.35.3 |
 | Reporting (secondary) | ExtentReports | 5.1.2 |
 | Logging | Log4j2 | 2.x |
-| CI | GitHub Actions + Jenkins | — |
+| CI | GitHub Actions + Jenkins | n/a |
 
 Exact versions are pinned in `pom.xml` properties.
 
@@ -38,11 +38,15 @@ Exact versions are pinned in `pom.xml` properties.
 
 ```
 selenium-cucumber-framework/
-├── .github/workflows/
-│   ├── ci.yml                  # Smoke tests on push/PR (Chrome headless)
-│   ├── cross-browser.yml       # Chrome + Firefox matrix on push/PR
-│   ├── allure-gh-pages.yml     # Publishes Allure report to GitHub Pages
-│   └── api-tests.yml           # API-only CI (Phase 2 branch)
+├── .github/
+│   ├── actions/
+│   │   └── publish-allure-report/   # Composite action: generate + deploy the Allure report
+│   └── workflows/
+│       ├── ci.yml                  # Smoke tests on push/PR (Chrome headless)
+│       ├── cross-browser.yml       # Chrome + Firefox matrix on push/PR
+│       ├── allure-gh-pages.yml     # Publishes Allure report after ci.yml completes
+│       ├── regression.yml          # Nightly full suite, also publishes the Allure report
+│       └── api-tests.yml           # API-only CI (Phase 2 branch)
 ├── Jenkinsfile
 ├── pom.xml
 ├── testng.xml
@@ -201,7 +205,7 @@ Tags in use: `@Smoke`, `@Regression`, `@E2E`, `@Login`, `@Product`, `@API`, `@Po
 
 ## CI/CD
 
-### GitHub Actions — free for public repos
+### GitHub Actions: free for public repos
 
 This repo is public. GitHub Actions gives **unlimited free minutes** on Linux runners (`ubuntu-latest`) for public repositories. There is no cost and no monthly cap. If you ever move this to a private repo, the free tier is 2,000 minutes/month on Linux.
 
@@ -211,7 +215,7 @@ Five workflows are active:
 |---|---|---|---|
 | CI smoke | `ci.yml` | push / PR to main, develop | `@Smoke` on Chrome headless |
 | Cross-browser | `cross-browser.yml` | push / PR to main, develop | `@Smoke` on Chrome + Firefox in parallel |
-| Allure Pages | `allure-gh-pages.yml` | after CI smoke completes | Publishes Allure report to GitHub Pages |
+| Allure Pages | `allure-gh-pages.yml` | after CI smoke completes, or nightly via regression | Publishes Allure report to GitHub Pages |
 | API tests | `api-tests.yml` | push to feat/api-scaffold | `@API` headless, no browser |
 | Full regression | `regression.yml` | nightly (cron) + manual dispatch | Configurable tag filter (default `@Regression`) and browser (chrome/firefox), full report artifacts |
 
@@ -219,9 +223,9 @@ To trigger manually: **Actions** tab → select workflow → **Run workflow** �
 
 ### Allure report on GitHub Pages
 
-After `ci.yml` completes, `allure-gh-pages.yml` fires automatically: it re-runs `@Smoke`, generates the report with the Allure CLI (`allure generate`), carries forward trend history from the current `gh-pages` branch, and publishes the result.
+After `ci.yml` completes, `allure-gh-pages.yml` fires automatically: it re-runs `@Smoke`, generates the report with the Allure CLI (`allure generate`), carries forward trend history from the current `gh-pages` branch, and publishes the result. The nightly `regression.yml` run publishes the same way right after its own test run, so the report also refreshes every night with the full `@Regression` suite even if nobody pushed code that day. Both paths share the deploy logic through the composite action at `.github/actions/publish-allure-report`.
 
-To activate on a fresh fork or after first run: **Settings → Pages → Source → Deploy from branch → `gh-pages` / root**. The `gh-pages` branch is created automatically the first time the workflow runs (via push to `main`/`develop` or manual dispatch from the Actions tab) — Pages can't be enabled until it exists.
+To activate on a fresh fork or after first run: **Settings → Pages → Source → Deploy from branch → `gh-pages` / root**. The `gh-pages` branch is created automatically the first time the workflow runs (via push to `main`/`develop` or manual dispatch from the Actions tab). Pages can't be enabled until it exists.
 
 Live URL: https://krishnaharshap.github.io/selenium-cucumber-framework/
 
@@ -259,17 +263,17 @@ CI artifacts (Surefire reports, Cucumber reports, Allure results) are uploaded o
 
 ## Key Design Decisions
 
-**Picocontainer DI** — `ScenarioContext` is injected once per scenario into all step definition classes by Picocontainer. All page objects live in the context, so `LoginSteps`, `ProductSteps`, and `CheckoutSteps` share the same page instances for a given scenario. No static state.
+**Picocontainer DI**: `ScenarioContext` is injected once per scenario into all step definition classes by Picocontainer. All page objects live in the context, so `LoginSteps`, `ProductSteps`, and `CheckoutSteps` share the same page instances for a given scenario. No static state.
 
-**AUT-agnostic config** — The framework is not hardwired to SauceDemo. Change `url` in `config.properties` or override with `-Durl=`. The generic `addProductToCart(String)` step derives button IDs from product names so product tests work against any standard e-commerce app.
+**AUT-agnostic config**: The framework is not hardwired to SauceDemo. Change `url` in `config.properties` or override with `-Durl=`. The generic `addProductToCart(String)` step derives button IDs from product names so product tests work against any standard e-commerce app.
 
-**Parallel-ready** — `DriverManager` uses `ThreadLocal<WebDriver>`. To enable parallel execution, change `parallel="none"` to `parallel="methods"` in `testng.xml` and set a thread count. Leave at `none` until scenarios are confirmed flake-free.
+**Parallel-ready**: `DriverManager` uses `ThreadLocal<WebDriver>`. To enable parallel execution, change `parallel="none"` to `parallel="methods"` in `testng.xml` and set a thread count. Leave at `none` until scenarios are confirmed flake-free.
 
-**Cross-browser** — CI runs Chrome + Firefox in parallel via matrix. Edge is supported in `DriverManager` locally but excluded from the CI matrix (install complexity on ubuntu-latest).
+**Cross-browser**: CI runs Chrome + Firefox in parallel via matrix. Edge is supported in `DriverManager` locally but excluded from the CI matrix (install complexity on ubuntu-latest).
 
 ---
 
 ## Contact
 
-Krishna Harsha — krishnaharshap11@gmail.com  
+Krishna Harsha, krishnaharshap11@gmail.com  
 GitHub: https://github.com/krishnaharshap
