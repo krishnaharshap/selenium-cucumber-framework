@@ -1,0 +1,54 @@
+name: Publish Allure Report
+description: Generates an Allure report from existing results and deploys it to the gh-pages branch.
+
+inputs:
+  allure-results-path:
+    description: Path to the Allure results directory
+    required: false
+    default: target/allure-results
+  github-token:
+    description: Token used to push the generated report to gh-pages
+    required: true
+  commit-message:
+    description: Commit message used for the gh-pages deploy
+    required: false
+    default: "chore: update Allure report [skip ci]"
+
+runs:
+  using: composite
+  steps:
+    - name: Fetch existing Allure history from gh-pages
+      uses: actions/checkout@v4
+      continue-on-error: true
+      with:
+        ref: gh-pages
+        path: gh-pages
+
+    - name: Restore Allure history
+      shell: bash
+      continue-on-error: true
+      run: |
+        if [ -d "gh-pages/history" ]; then
+          echo "Restoring history from previous deployment"
+          cp -r gh-pages/history "${{ inputs.allure-results-path }}/history"
+        else
+          echo "No previous history found — first run"
+        fi
+
+    - name: Install Allure CLI
+      shell: bash
+      run: npm install -g allure-commandline@2.43.0
+
+    - name: Generate Allure Report
+      shell: bash
+      if: always()
+      run: allure generate "${{ inputs.allure-results-path }}" --clean -o allure-report
+
+    - name: Deploy to GitHub Pages
+      uses: peaceiris/actions-gh-pages@v4
+      if: always()
+      with:
+        github_token: ${{ inputs.github-token }}
+        publish_branch: gh-pages
+        publish_dir: allure-report
+        commit_message: ${{ inputs.commit-message }}
