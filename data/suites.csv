@@ -1,22 +1,22 @@
-"Status","Start Time","Stop Time","Duration in ms","Parent Suite","Suite","Sub Suite","Test Class","Test Method","Name","Description"
-"passed","Sat Sep 12 16:53:38 UTC 2026","Sat Sep 12 16:53:40 UTC 2026","1568","","End-to-End Checkout Process","","Complete purchase with different user data","","Complete purchase with different user data","  As a customer
+"DESCRIPTION","DURATION IN MS","NAME","PARENT SUITE","START TIME","STATUS","STOP TIME","SUB SUITE","SUITE","TEST CLASS","TEST METHOD"
+"  As a customer
   I want to complete the full purchase flow
-  So that I can successfully order products"
-"passed","Sat Sep 12 16:53:19 UTC 2026","Sat Sep 12 16:53:35 UTC 2026","15839","","End-to-End Checkout Process","","Complete end-to-end purchase flow","","Complete end-to-end purchase flow","  As a customer
-  I want to complete the full purchase flow
-  So that I can successfully order products"
-"passed","Sat Sep 12 16:53:43 UTC 2026","Sat Sep 12 16:53:44 UTC 2026","1267","","Product Management and Cart Functionality","","Add single product to cart","","Add single product to cart","  As a logged-in user
+  So that I can successfully order products","6027","Complete end-to-end purchase flow","","2026-09-12","passed","2026-09-12","","End-to-End Checkout Process","Complete end-to-end purchase flow",""
+"  As a logged-in user
   I want to add and remove products from cart
-  So that I can manage my shopping cart"
-"passed","Sat Sep 12 16:53:37 UTC 2026","Sat Sep 12 16:53:38 UTC 2026","1601","","End-to-End Checkout Process","","Complete purchase with different user data","","Complete purchase with different user data","  As a customer
+  So that I can manage my shopping cart","1234","Add single product to cart","","2026-09-12","passed","2026-09-12","","Product Management and Cart Functionality","Add single product to cart",""
+"  As a customer
   I want to complete the full purchase flow
-  So that I can successfully order products"
-"passed","Sat Sep 12 16:53:41 UTC 2026","Sat Sep 12 16:53:43 UTC 2026","1265","","User Login Functionality","","Successful login with valid credentials","","Successful login with valid credentials","  As a user of the SauceDemo application
+  So that I can successfully order products","1501","Complete purchase with different user data","","2026-09-12","passed","2026-09-12","","End-to-End Checkout Process","Complete purchase with different user data",""
+"  As a user of the SauceDemo application
   I want to be able to login with valid credentials
-  So that I can access the products page"
-"passed","Sat Sep 12 16:53:40 UTC 2026","Sat Sep 12 16:53:41 UTC 2026","1532","","End-to-End Checkout Process","","Complete purchase with different user data","","Complete purchase with different user data","  As a customer
+  So that I can access the products page","1214","Successful login with valid credentials","","2026-09-12","passed","2026-09-12","","User Login Functionality","Successful login with valid credentials",""
+"  As a customer
   I want to complete the full purchase flow
-  So that I can successfully order products"
-"passed","Sat Sep 12 16:53:35 UTC 2026","Sat Sep 12 16:53:37 UTC 2026","1659","","End-to-End Checkout Process","","Purchase single item with complete checkout","","Purchase single item with complete checkout","  As a customer
+  So that I can successfully order products","1511","Complete purchase with different user data","","2026-09-12","passed","2026-09-12","","End-to-End Checkout Process","Complete purchase with different user data",""
+"  As a customer
   I want to complete the full purchase flow
-  So that I can successfully order products"
+  So that I can successfully order products","1615","Purchase single item with complete checkout","","2026-09-12","passed","2026-09-12","","End-to-End Checkout Process","Purchase single item with complete checkout",""
+"  As a customer
+  I want to complete the full purchase flow
+  So that I can successfully order products","1554","Complete purchase with different user data","","2026-09-12","passed","2026-09-12","","End-to-End Checkout Process","Complete purchase with different user data",""
