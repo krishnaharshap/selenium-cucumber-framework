@@ -1,55 +1,55 @@
 "DESCRIPTION","DURATION IN MS","NAME","PARENT SUITE","START TIME","STATUS","STOP TIME","SUB SUITE","SUITE","TEST CLASS","TEST METHOD"
-"  As a logged-in user
-  I want to add and remove products from cart
-  So that I can manage my shopping cart","1131","Verify products page displays all items","","2026-11-01","passed","2026-11-01","","Product Management and Cart Functionality","Verify products page displays all items",""
-"  As a user of the SauceDemo application
-  I want to be able to login with valid credentials
-  So that I can access the products page","1164","Login with invalid username","","2026-11-01","passed","2026-11-01","","User Login Functionality","Login with invalid username",""
 "  As a customer
   I want to complete the full purchase flow
-  So that I can successfully order products","1500","Complete purchase with different user data","","2026-11-01","passed","2026-11-01","","End-to-End Checkout Process","Complete purchase with different user data",""
+  So that I can successfully order products","1208","Purchase single item with complete checkout","","2026-11-08","passed","2026-11-08","","End-to-End Checkout Process","Purchase single item with complete checkout",""
 "  As a user of the SauceDemo application
   I want to be able to login with valid credentials
-  So that I can access the products page","1132","Login with multiple invalid credentials","","2026-11-01","passed","2026-11-01","","User Login Functionality","Login with multiple invalid credentials",""
-"  As a user of the SauceDemo application
-  I want to be able to login with valid credentials
-  So that I can access the products page","1107","Login with multiple invalid credentials","","2026-11-01","passed","2026-11-01","","User Login Functionality","Login with multiple invalid credentials",""
-"  As a user of the SauceDemo application
-  I want to be able to login with valid credentials
-  So that I can access the products page","1090","Login with locked out user","","2026-11-01","passed","2026-11-01","","User Login Functionality","Login with locked out user",""
-"  As a logged-in user
-  I want to add and remove products from cart
-  So that I can manage my shopping cart","1190","Add single product to cart","","2026-11-01","passed","2026-11-01","","Product Management and Cart Functionality","Add single product to cart",""
-"  As a logged-in user
-  I want to add and remove products from cart
-  So that I can manage my shopping cart","41831","Remove product from cart","","2026-11-01","passed","2026-11-01","","Product Management and Cart Functionality","Remove product from cart",""
-"  As a user of the SauceDemo application
-  I want to be able to login with valid credentials
-  So that I can access the products page","1121","Login with invalid password","","2026-11-01","passed","2026-11-01","","User Login Functionality","Login with invalid password",""
+  So that I can access the products page","923","Successful login using step by step approach","","2026-11-08","passed","2026-11-08","","User Login Functionality","Successful login using step by step approach",""
 "  As a customer
   I want to complete the full purchase flow
-  So that I can successfully order products","1505","Complete purchase with different user data","","2026-11-01","passed","2026-11-01","","End-to-End Checkout Process","Complete purchase with different user data",""
-"  As a user of the SauceDemo application
-  I want to be able to login with valid credentials
-  So that I can access the products page","1095","Login with multiple invalid credentials","","2026-11-01","passed","2026-11-01","","User Login Functionality","Login with multiple invalid credentials",""
-"  As a user of the SauceDemo application
-  I want to be able to login with valid credentials
-  So that I can access the products page","1134","Successful login using step by step approach","","2026-11-01","passed","2026-11-01","","User Login Functionality","Successful login using step by step approach",""
-"  As a user of the SauceDemo application
-  I want to be able to login with valid credentials
-  So that I can access the products page","1145","Successful login with valid credentials","","2026-11-01","passed","2026-11-01","","User Login Functionality","Successful login with valid credentials",""
-"  As a customer
-  I want to complete the full purchase flow
-  So that I can successfully order products","1470","Complete purchase with different user data","","2026-11-01","passed","2026-11-01","","End-to-End Checkout Process","Complete purchase with different user data",""
+  So that I can successfully order products","4619","Complete end-to-end purchase flow","","2026-11-08","passed","2026-11-08","","End-to-End Checkout Process","Complete end-to-end purchase flow",""
 "  As a logged-in user
   I want to add and remove products from cart
-  So that I can manage my shopping cart","1332","View cart with added products","","2026-11-01","passed","2026-11-01","","Product Management and Cart Functionality","View cart with added products",""
+  So that I can manage my shopping cart","1115","View cart with added products","","2026-11-08","passed","2026-11-08","","Product Management and Cart Functionality","View cart with added products",""
 "  As a customer
   I want to complete the full purchase flow
-  So that I can successfully order products","1517","Purchase single item with complete checkout","","2026-11-01","passed","2026-11-01","","End-to-End Checkout Process","Purchase single item with complete checkout",""
+  So that I can successfully order products","1165","Complete purchase with different user data","","2026-11-08","passed","2026-11-08","","End-to-End Checkout Process","Complete purchase with different user data",""
+"  As a user of the SauceDemo application
+  I want to be able to login with valid credentials
+  So that I can access the products page","911","Login with locked out user","","2026-11-08","passed","2026-11-08","","User Login Functionality","Login with locked out user",""
+"  As a user of the SauceDemo application
+  I want to be able to login with valid credentials
+  So that I can access the products page","976","Login with invalid username","","2026-11-08","passed","2026-11-08","","User Login Functionality","Login with invalid username",""
+"  As a customer
+  I want to complete the full purchase flow
+  So that I can successfully order products","1236","Complete purchase with different user data","","2026-11-08","passed","2026-11-08","","End-to-End Checkout Process","Complete purchase with different user data",""
 "  As a logged-in user
   I want to add and remove products from cart
-  So that I can manage my shopping cart","1187","Add multiple products to cart","","2026-11-01","passed","2026-11-01","","Product Management and Cart Functionality","Add multiple products to cart",""
+  So that I can manage my shopping cart","921","Verify products page displays all items","","2026-11-08","passed","2026-11-08","","Product Management and Cart Functionality","Verify products page displays all items",""
+"  As a user of the SauceDemo application
+  I want to be able to login with valid credentials
+  So that I can access the products page","929","Successful login with valid credentials","","2026-11-08","passed","2026-11-08","","User Login Functionality","Successful login with valid credentials",""
+"  As a user of the SauceDemo application
+  I want to be able to login with valid credentials
+  So that I can access the products page","916","Login with multiple invalid credentials","","2026-11-08","passed","2026-11-08","","User Login Functionality","Login with multiple invalid credentials",""
+"  As a user of the SauceDemo application
+  I want to be able to login with valid credentials
+  So that I can access the products page","908","Login with invalid password","","2026-11-08","passed","2026-11-08","","User Login Functionality","Login with invalid password",""
+"  As a logged-in user
+  I want to add and remove products from cart
+  So that I can manage my shopping cart","41614","Remove product from cart","","2026-11-08","passed","2026-11-08","","Product Management and Cart Functionality","Remove product from cart",""
+"  As a user of the SauceDemo application
+  I want to be able to login with valid credentials
+  So that I can access the products page","931","Login with multiple invalid credentials","","2026-11-08","passed","2026-11-08","","User Login Functionality","Login with multiple invalid credentials",""
+"  As a user of the SauceDemo application
+  I want to be able to login with valid credentials
+  So that I can access the products page","893","Login with multiple invalid credentials","","2026-11-08","passed","2026-11-08","","User Login Functionality","Login with multiple invalid credentials",""
+"  As a logged-in user
+  I want to add and remove products from cart
+  So that I can manage my shopping cart","973","Add single product to cart","","2026-11-08","passed","2026-11-08","","Product Management and Cart Functionality","Add single product to cart",""
+"  As a logged-in user
+  I want to add and remove products from cart
+  So that I can manage my shopping cart","1009","Add multiple products to cart","","2026-11-08","passed","2026-11-08","","Product Management and Cart Functionality","Add multiple products to cart",""
 "  As a customer
   I want to complete the full purchase flow
-  So that I can successfully order products","11219","Complete end-to-end purchase flow","","2026-11-01","passed","2026-11-01","","End-to-End Checkout Process","Complete end-to-end purchase flow",""
+  So that I can successfully order products","1172","Complete purchase with different user data","","2026-11-08","passed","2026-11-08","","End-to-End Checkout Process","Complete purchase with different user data",""
